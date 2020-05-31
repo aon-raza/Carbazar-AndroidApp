@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content">
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:id="@+id/option"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="4pt"
+        android:background="@drawable/bot_options"
+        android:elevation="1pt"
+        android:paddingHorizontal="4pt"
+        android:text="Option of this are"
+        android:inputType="text"
+        android:textSize="8pt"
+        android:gravity="center"
+        android:paddingVertical="0pt"
+        android:textColor="#ffffff" />
+
+</RelativeLayout>

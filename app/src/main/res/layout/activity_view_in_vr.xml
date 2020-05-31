@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".viewInVR">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/instructions"
+                android:id="@+id/ins_label"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="16pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/inst_vr"
+                android:id="@+id/inst_vr"
+                android:layout_below="@+id/ins_label"
+                android:textSize="8pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/viewAppInVR"
+                android:text="@string/view_app_in_vr"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:inputType="text"
+                android:background="@color/colorPrimaryDark"
+                android:layout_below="@+id/inst_vr"
+                android:layout_marginHorizontal="32pt"
+                android:layout_marginTop="12pt"
+                android:layout_marginBottom="4pt"
+                android:paddingHorizontal="4pt"
+                android:paddingVertical="4pt" />
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

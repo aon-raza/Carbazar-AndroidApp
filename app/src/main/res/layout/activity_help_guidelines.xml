@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".helpGuidelines">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/reality_car_models"
+                android:id="@+id/RCM_label"
+                android:gravity="center_vertical"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="16pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="100pt"
+                android:scaleType="centerCrop"
+                android:id="@+id/RCM_guide_image"
+                android:layout_below="@+id/RCM_label"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:src="@drawable/rcm_guide"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/rcm_guide1"
+                android:id="@+id/RCM_guide"
+                android:layout_below="@+id/RCM_guide_image"
+                android:textSize="7pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/seller_ads3"
+                android:id="@+id/SA_label"
+                android:layout_below="@+id/RCM_guide"
+                android:gravity="center_vertical"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="16pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="100pt"
+                android:scaleType="centerCrop"
+                android:id="@+id/SA_guide_image"
+                android:layout_below="@+id/SA_label"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:src="@drawable/sa_guide"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/sa_guide1"
+                android:id="@+id/SA_guide"
+                android:layout_below="@+id/SA_guide_image"
+                android:textSize="7pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/chat_me"
+                android:id="@+id/CM_label"
+                android:layout_below="@+id/SA_guide"
+                android:gravity="center_vertical"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="16pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="match_parent"
+                android:layout_height="100pt"
+                android:scaleType="centerCrop"
+                android:id="@+id/CM_guide_image"
+                android:layout_below="@+id/CM_label"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:src="@drawable/cm_guide"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/cm_guide1"
+                android:id="@+id/CM_guide"
+                android:layout_below="@+id/CM_guide_image"
+                android:textSize="7pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

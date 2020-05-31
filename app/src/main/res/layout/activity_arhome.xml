@@ -1,0 +1,164 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ARHome">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/bottomNavigation">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginHorizontal="4pt">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bmw_RL">
+
+                <ImageView
+                    android:src="@drawable/black"
+                    android:id="@+id/bmw"
+                    android:layout_width="60pt"
+                    android:layout_height="40pt"
+                    />
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/bmw_txtv"
+                    android:text="@string/bmw"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/bmw"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:layout_below="@+id/bmw_RL"
+                android:layout_marginVertical="2pt"
+                android:layout_marginHorizontal="2pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/porsch_RL"
+                android:layout_below="@+id/bmw_RL">
+
+                <ImageView
+                    android:id="@+id/porsch"
+                    android:src="@drawable/bmw"
+                    android:layout_width="60pt"
+                    android:layout_height="40pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/porsch"
+                    android:id="@+id/porsch_txtv"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/porsch"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:layout_below="@+id/porsch_RL"
+                android:layout_marginVertical="2pt"
+                android:layout_marginHorizontal="2pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/benz_RL"
+                android:layout_below="@+id/porsch_RL">
+
+            <ImageView
+                android:id="@+id/benz"
+                android:layout_width="60pt"
+                android:layout_height="40pt"
+                android:src="@drawable/audi"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/benz_txtv"
+                    android:text="@string/mercedes_benz"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/benz"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5pt"
+                    android:background="#f2f2f2"
+                    android:layout_below="@+id/benz"
+                    android:layout_marginVertical="2pt"
+                    android:layout_marginHorizontal="2pt"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/elantra_RL"
+                android:layout_below="@+id/benz_RL">
+
+                <ImageView
+                    android:id="@+id/elantra"
+                    android:layout_width="60pt"
+                    android:layout_height="40pt"
+                    android:src="@drawable/corolla"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/elantra_txtv"
+                    android:text="@string/elantra"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/elantra"/>
+
+            </RelativeLayout>
+
+        </RelativeLayout>
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavigation"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/bottom_nav_icon_color_selector"
+        app:menu="@menu/bottom_navigation_menu"
+        app:theme="@style/BottomNavigationTheme"
+        app:itemBackground="@color/colorBackgroundBottomNavigation"
+        android:backgroundTint="@color/colorBackgroundBottomNavigation"/>
+
+</RelativeLayout>

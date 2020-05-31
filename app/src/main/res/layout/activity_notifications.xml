@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".notifications">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusableInTouchMode="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/special_offers_and_communications"
+                android:id="@+id/SOC_label"
+                android:gravity="center_vertical"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="16pt"
+                android:layout_marginBottom="2pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/receive_updates_offers_surveys_and_more"
+                android:id="@+id/offersBS_label"
+                android:layout_below="@+id/SOC_label"
+                android:gravity="center_vertical"
+                android:layout_marginStart="4pt"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/SOC_switch"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="16pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space1"
+                android:layout_below="@+id/offersBS_label"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/recommendations1"
+                android:id="@+id/Recommendations_label"
+                android:layout_below="@+id/space1"
+                android:gravity="center_vertical"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="8pt"
+                android:layout_marginBottom="2pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/based_on_your_activity"
+                android:id="@+id/Activity_based_label"
+                android:layout_below="@+id/Recommendations_label"
+                android:gravity="center_vertical"
+                android:layout_marginStart="4pt"/>
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/Rec_switch"
+                android:layout_below="@+id/space1"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="8pt"/>
+
+        </RelativeLayout>
+    </ScrollView>
+
+</RelativeLayout>

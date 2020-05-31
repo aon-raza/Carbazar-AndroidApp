@@ -1,0 +1,484 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".filters">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:layout_above="@+id/apply_btn">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:focusedByDefault="true"
+            android:focusableInTouchMode="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_Label"
+                android:text="@string/price"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textSize="10pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price1_Layout"
+                android:layout_below="@+id/price_Label"
+                android:layout_toLeftOf="@+id/price_Label_to"
+                android:layout_alignParentLeft="true"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/price1_field"
+                    android:selectAllOnFocus="true"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_Label_to"
+                android:text="@string/to"
+                android:layout_below="@+id/price_Label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/price2_Layout"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/price_Label"
+                android:layout_toRightOf="@+id/price_Label_to"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/price2_field"
+                    android:selectAllOnFocus="true"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarPrice"
+                android:layout_below="@id/price1_Layout"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:left_thumb_color="@color/colorPrimary"
+                app:right_thumb_color="@color/colorPrimary"
+                app:left_thumb_color_pressed="@color/colorAccent"
+                app:right_thumb_color_pressed="@color/colorAccent"
+                app:data_type="_long"
+                app:min_value="0"
+                app:max_value="5000000"
+                app:steps="25000"
+                app:gap="25000"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="8pt"
+                android:layout_marginTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/year_Label"
+                android:layout_below="@+id/seekBarPrice"
+                android:text="@string/year"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textSize="10pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/year1_Layout"
+                android:layout_below="@+id/year_Label"
+                android:layout_toLeftOf="@+id/year_Label_to"
+                android:layout_alignParentLeft="true"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/year1_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/year_Label_to"
+                android:text="@string/to"
+                android:layout_below="@+id/year_Label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/year2_Layout"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/year_Label"
+                android:layout_toRightOf="@+id/year_Label_to"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/year2_field"
+                    android:selectAllOnFocus="true"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarYear"
+                android:layout_below="@id/year1_Layout"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:left_thumb_color="@color/colorPrimary"
+                app:right_thumb_color="@color/colorPrimary"
+                app:left_thumb_color_pressed="@color/colorAccent"
+                app:right_thumb_color_pressed="@color/colorAccent"
+                app:data_type="_integer"
+                app:min_value="1970"
+                app:max_value="2020"
+                app:steps="1"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="8pt"
+                android:layout_marginTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/KMDriven_Label"
+                android:layout_below="@+id/seekBarYear"
+                android:text="@string/kms_driven"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textSize="10pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/KMDriven1_Layout"
+                android:layout_below="@+id/KMDriven_Label"
+                android:layout_toLeftOf="@+id/KMDriven_Label_to"
+                android:layout_alignParentLeft="true"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/KMDriven1_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/KMDriven_Label_to"
+                android:text="@string/to"
+                android:layout_below="@+id/KMDriven_Label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/KMDriven2_Layout"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/KMDriven_Label"
+                android:layout_toRightOf="@+id/KMDriven_Label_to"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/KMDriven2_field"
+                    android:selectAllOnFocus="true"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarKMDriven"
+                android:layout_below="@id/KMDriven1_Layout"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:left_thumb_color="@color/colorPrimary"
+                app:right_thumb_color="@color/colorPrimary"
+                app:left_thumb_color_pressed="@color/colorAccent"
+                app:right_thumb_color_pressed="@color/colorAccent"
+                app:data_type="_integer"
+                app:min_value="0"
+                app:max_value="500000"
+                app:steps="5000"
+                app:gap="5000"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="8pt"
+                android:layout_marginTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/locationSpinner"
+                android:layout_below="@+id/seekBarKMDriven"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/loc" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/makeSpinner"
+                android:layout_below="@+id/locationSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/smmm" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/modelSpinner"
+                android:layout_below="@+id/makeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/SelectModel" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/regCitySpinner"
+                android:layout_below="@+id/modelSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/RegCity" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/engTypeSpinner"
+                android:layout_below="@+id/regCitySpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/ET" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/conditionSpinner"
+                android:layout_below="@+id/engTypeSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/cond" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/transmissionSpinner"
+                android:layout_below="@+id/conditionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/transmission2" />
+
+            <androidx.appcompat.widget.AppCompatSpinner
+                android:id="@+id/colorSpinner"
+                android:layout_below="@+id/transmissionSpinner"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/ExtColor" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/engineCapacity_Label"
+                android:layout_below="@+id/colorSpinner"
+                android:text="@string/engine_capacity_cc3"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textSize="10pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/engineCapacity1_Layout"
+                android:layout_below="@+id/engineCapacity_Label"
+                android:layout_toLeftOf="@+id/engineCapacity_Label_to"
+                android:layout_alignParentLeft="true"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:id="@+id/engineCapacity1_field"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:inputType="number"
+                    android:selectAllOnFocus="true" />
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/engineCapacity_Label_to"
+                android:text="@string/to"
+                android:layout_below="@+id/engineCapacity_Label"
+                android:layout_centerHorizontal="true"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/engineCapacity2_Layout"
+                android:layout_alignParentRight="true"
+                android:layout_below="@+id/engineCapacity_Label"
+                android:layout_toRightOf="@+id/engineCapacity_Label_to"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.Dense"
+                app:boxCornerRadiusBottomEnd="0pt"
+                app:boxCornerRadiusBottomStart="0pt"
+                app:boxCornerRadiusTopEnd="0pt"
+                app:boxCornerRadiusTopStart="0pt">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/engineCapacity2_field"
+                    android:selectAllOnFocus="true"
+                    android:inputType="number"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.crystal.crystalrangeseekbar.widgets.CrystalRangeSeekbar
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seekBarengineCapacity"
+                android:layout_below="@id/engineCapacity1_Layout"
+                app:bar_highlight_color="@color/colorPrimary"
+                app:left_thumb_color="@color/colorPrimary"
+                app:right_thumb_color="@color/colorPrimary"
+                app:left_thumb_color_pressed="@color/colorAccent"
+                app:right_thumb_color_pressed="@color/colorAccent"
+                app:data_type="_integer"
+                app:min_value="600"
+                app:max_value="3500"
+                app:steps="100"
+                app:gap="100"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="8pt"
+                android:layout_marginTop="2pt"/>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/apply_btn"
+        android:text="@string/apply"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

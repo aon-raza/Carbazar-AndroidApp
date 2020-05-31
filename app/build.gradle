@@ -1,0 +1,105 @@
+apply plugin: 'com.android.application'
+
+apply plugin: 'com.google.ar.sceneform.plugin'
+
+android {
+    compileSdkVersion 28
+    defaultConfig {
+        applicationId "com.example.carbazar"
+        minSdkVersion 26
+        targetSdkVersion 28
+        versionCode 1
+        versionName "1.0"
+        testInstrumentationRunner "androidx.test.runner.AndroidJUnitRunner"
+    }
+    buildTypes {
+        release {
+            minifyEnabled false
+            proguardFiles getDefaultProguardFile('proguard-android-optimize.txt'), 'proguard-rules.pro'
+        }
+    }
+    compileOptions {
+        sourceCompatibility = 1.8
+        targetCompatibility = 1.8
+    }
+}
+
+dependencies {
+    implementation fileTree(dir: 'libs', include: ['*.jar'])
+    implementation 'androidx.appcompat:appcompat:1.0.2'
+    implementation 'androidx.constraintlayout:constraintlayout:1.1.3'
+    testImplementation 'junit:junit:4.12'
+    androidTestImplementation 'androidx.test:runner:1.1.1'
+    androidTestImplementation 'androidx.test.espresso:espresso-core:3.1.1'
+
+    implementation "com.google.ar.sceneform.ux:sceneform-ux:1.13.0"
+    implementation 'com.google.ar.sceneform:assets:1.5.0'
+
+
+    implementation 'com.android.support:design:28.0.0'
+
+    //recyclerview
+    implementation "com.android.support:recyclerview-v7:28.0.0"
+
+    //cardview
+    implementation 'com.android.support:cardview-v7:28.0.0'
+
+    //glide
+    implementation 'com.github.bumptech.glide:glide:4.4.0'
+    annotationProcessor 'com.github.bumptech.glide:compiler:4.4.0'
+
+    //circle imageview
+    implementation 'de.hdodenhof:circleimageview:2.2.0'
+
+    implementation 'org.mongodb:mongo-java-driver:3.11.1'
+
+
+    implementation 'com.squareup.retrofit2:adapter-rxjava2:2.6.2'
+    implementation 'com.squareup.retrofit2:converter-scalars:2.6.2'
+
+    implementation 'io.reactivex.rxjava2:rxandroid:2.0.1'
+    implementation 'io.reactivex.rxjava2:rxjava:2.1.7'
+    implementation 'com.squareup.retrofit2:converter-gson:2.6.2'
+    implementation 'de.hdodenhof:circleimageview:3.0.1'
+    implementation 'com.mcxiaoke.volley:library:1.0.19'
+    implementation 'androidx.security:security-crypto:1.0.0-alpha02'
+
+    implementation 'com.crystal:crystalrangeseekbar:1.1.3'
+}
+
+//sceneform.asset('SampleData/models/bear.fbx',
+//        'default',
+//        'SampleData/models/bear.sfa',
+//        'src/main/res/raw/bear')
+//
+//sceneform.asset('SampleData/models/cow.fbx',
+//        'default',
+//        'SampleData/models/cow.sfa',
+//        'src/main/res/raw/cow')
+repositories {
+    mavenCentral()
+}
+sceneform.asset('SampleData/bmw/BMW X5 4.fbx',
+        'default',
+        'SampleData/bmw/BMW X5 4.sfa',
+        'src/main/res/raw/bmw')
+
+//sceneform.asset('SampleData/lamborg/1.obj',
+//        'default',
+//        'SampleData/lamborg/1.sfa',
+//        'src/main/res/raw/lamb/1')
+
+sceneform.asset('SampleData/porsch/Porsche_911_GT2.obj',
+        'default',
+        'SampleData/porsch/Porsche_911_GT2.sfa',
+        'src/main/res/raw/porsch')
+
+sceneform.asset('SampleData/elantra/elantra f.obj',
+        'default',
+        'SampleData/elantra/elantra f.sfa',
+        'src/main/res/raw/elantra')
+
+sceneform.asset('SampleData/benz/Mercedes-Benz CL600 2007 OBJ.obj',
+        'default',
+        'SampleData/benz/Mercedes-Benz CL600 2007 OBJ.sfa',
+        'src/main/res/raw/benz')

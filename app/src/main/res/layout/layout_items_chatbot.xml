@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:orientation="vertical">
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/botText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4pt"
+        android:layout_marginStart="4pt"
+        android:layout_marginEnd="16pt"
+        android:background="@drawable/bot_chat"
+        android:elevation="1pt"
+        android:padding="4pt"
+        android:text="Hello this is me!!"
+        android:textColor="#212121" />
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:id="@+id/cardview_image_chatbot"
+        android:layout_below="@+id/botText"
+        app:cardCornerRadius="2pt"
+        app:cardMaxElevation="0.5pt"
+        app:cardElevation="0.3pt"
+        android:background="#ffffff"
+        android:layout_marginStart="4pt"
+        android:layout_marginEnd="16pt"
+        android:layout_marginTop="2pt"
+        android:layout_marginBottom="4pt">
+
+        <androidx.appcompat.widget.AppCompatImageView
+            android:layout_width="match_parent"
+            android:layout_height="128pt"
+            android:scaleType="centerCrop"
+            android:id="@+id/car_image_chatbot"
+            android:src="@drawable/ic_launcher_background"/>
+
+    </androidx.cardview.widget.CardView>
+
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:id="@+id/userText"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginVertical="4pt"
+        android:layout_marginStart="16pt"
+        android:layout_marginEnd="4pt"
+        android:layout_alignParentEnd="true"
+        android:background="@drawable/user_chat"
+        android:elevation="1pt"
+        android:padding="4pt"
+        android:text="Hi!! How are you!!"
+        android:textColor="#fff" />
+
+</RelativeLayout>

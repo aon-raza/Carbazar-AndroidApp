@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <item
+        android:id="@+id/home_nav"
+        android:title="@string/home"
+        android:icon="@drawable/home"
+        android:orderInCategory="1"/>
+
+    <item
+        android:id="@+id/post_nav"
+        android:title="@string/post"
+        android:icon="@drawable/post"
+        android:orderInCategory="2"/>
+
+    <item
+        android:id="@+id/chatbot_nav"
+        android:title="@string/assistant"
+        android:icon="@drawable/chatbot"
+        android:orderInCategory="3"/>
+
+    <item
+        android:id="@+id/ar_vr_nav"
+        android:title="@string/ar_vr"
+        android:icon="@drawable/ar_vr"
+        android:orderInCategory="4"/>
+
+    <item
+        android:id="@+id/account_nav"
+        android:title="@string/account"
+        android:icon="@drawable/account"
+        android:orderInCategory="5"/>
+
+
+
+</menu>

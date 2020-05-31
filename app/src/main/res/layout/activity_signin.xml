@@ -1,0 +1,117 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".signin">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:gravity="center_vertical"
+        android:id="@+id/RL_signin"
+        android:clickable="true"
+        android:focusableInTouchMode="true">
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sign_in_Label"
+            android:text="@string/sign_in"
+            android:textColor="@color/colorAccent"
+            android:textSize="16pt"
+            android:layout_marginHorizontal="16pt"
+            android:layout_marginBottom="4pt"/>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/i_email_Layout"
+            android:layout_below="@+id/sign_in_Label"
+            android:layout_marginHorizontal="16pt"
+            android:layout_marginTop="4pt"
+            android:layout_marginBottom="4pt">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/i_email_field"
+                android:text="aonraza399@gmail.com"
+                android:hint="@string/email"
+                android:inputType="text"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <com.google.android.material.textfield.TextInputLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/i_password_Layout"
+            android:layout_below="@+id/i_email_Layout"
+            android:layout_marginHorizontal="16pt"
+            android:layout_marginTop="4pt"
+            android:layout_marginBottom="4pt">
+
+            <androidx.appcompat.widget.AppCompatEditText
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/i_password_field"
+                android:text="Aonraza@1"
+                android:hint="@string/password"
+                android:inputType="textPassword"/>
+
+        </com.google.android.material.textfield.TextInputLayout>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:id="@+id/forgot_password"
+            android:text="@string/forgot_password"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_below="@+id/i_password_Layout"
+            android:textSize="8pt"
+            android:layout_alignParentRight="true"
+            android:layout_marginRight="16pt"
+            android:layout_marginTop="2pt"/>
+
+        <androidx.appcompat.widget.AppCompatButton
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/sign_in_btn"
+            android:text="@string/sign_in"
+            android:textColor="#ffffff"
+            android:gravity="center"
+            android:background="@color/colorPrimaryDark"
+            android:layout_centerHorizontal="true"
+            android:layout_below="@+id/forgot_password"
+            android:layout_marginHorizontal="40pt"
+            android:layout_marginTop="8pt"
+            android:layout_marginBottom="4pt"
+            android:paddingHorizontal="5pt"
+            android:paddingVertical="8pt" />
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/dont_have_acc"
+            android:text="@string/don_t_have_an_account"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_below="@+id/sign_in_btn"
+            android:textSize="8pt"
+            android:layout_marginHorizontal="40pt"
+            android:layout_marginTop="6pt"/>
+
+    </RelativeLayout>
+
+</RelativeLayout>

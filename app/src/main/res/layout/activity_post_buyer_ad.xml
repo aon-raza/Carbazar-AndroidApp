@@ -1,0 +1,194 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".postBuyerAd">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@id/bottomNavigation">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RL_Main">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/car_info_Label"
+                android:text="@string/car_information"
+                android:textColor="@color/colorPrimary"
+                android:textSize="16pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8pt"/>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/title_Layout"
+                android:layout_below="@+id/car_info_Label"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginTop="4pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/title_field"
+                    android:hint="@string/title"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+
+            <Spinner
+                android:id="@+id/citySpinnerSelection"
+                android:layout_below="@+id/title_Layout"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/scity" />
+
+            <Spinner
+                android:id="@+id/makeSpinnerSelection"
+                android:layout_below="@+id/citySpinnerSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:background="@drawable/gradient_spinner"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/SM" />
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/modelSpinnerSelection"
+                android:layout_below="@+id/makeSpinnerSelection"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/SelectModel"
+                android:drawSelectorOnTop="true"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/yearSpinnerSelection"
+                android:layout_below="@id/modelSpinnerSelection"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/selectYear"
+                android:drawSelectorOnTop="true"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/KMDrivenSpinnerSelection"
+                android:layout_below="@id/yearSpinnerSelection"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/kmDriven"
+                android:drawSelectorOnTop="true"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/upload_Photos_Label"
+                android:layout_below="@+id/KMDrivenSpinnerSelection"
+                android:text="@string/upload_a_photo"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginTop="8pt"/>
+
+            <androidx.appcompat.widget.AppCompatImageView
+                android:layout_width="40pt"
+                android:layout_height="40pt"
+                android:id="@+id/upload_photos"
+                android:scaleType="centerCrop"
+                android:layout_below="@+id/upload_Photos_Label"
+                android:src="@drawable/select_photos"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginTop="4pt"
+                android:layout_marginBottom="4pt"/>
+
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/additional_info_Label"
+                android:layout_below="@+id/upload_photos"
+                android:text="@string/additional_information"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginTop="8pt"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/engineCapacitySpinnerSelection"
+                android:layout_below="@+id/additional_info_Label"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/engine_capacity_cc"
+                android:drawSelectorOnTop="true"/>
+
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_btn"
+                android:text="@string/post1"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:background="@color/colorPrimaryDark"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/engineCapacitySpinnerSelection"
+                android:layout_marginHorizontal="40pt"
+                android:layout_marginTop="8pt"
+                android:layout_marginBottom="4pt"
+                android:paddingHorizontal="5pt"
+                android:paddingVertical="8pt" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavigation"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/bottom_nav_icon_color_selector"
+        app:menu="@menu/bottom_navigation_menu"
+        app:theme="@style/BottomNavigationTheme"
+        app:itemBackground="@color/colorBackgroundBottomNavigation"
+        android:backgroundTint="@color/colorBackgroundBottomNavigation"/>
+
+</RelativeLayout>

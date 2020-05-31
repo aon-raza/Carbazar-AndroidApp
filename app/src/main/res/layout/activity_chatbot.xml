@@ -1,0 +1,114 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#f4f6f7"    >
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/rvChat"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:orientation="vertical"
+        android:layout_above="@id/recyclerViewOptions"
+        android:paddingTop="2pt"
+        android:paddingBottom="2pt"
+        android:clipToPadding="false"
+        android:background="#f4f6f7" />
+
+    <androidx.recyclerview.widget.RecyclerView
+        android:id="@+id/recyclerViewOptions"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_above="@id/cbtyping"
+        android:paddingVertical="4pt"
+        android:clipToPadding="false"
+        android:background="#f4f6f7" />
+
+    <androidx.appcompat.widget.AppCompatTextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/cbtyping"
+        android:layout_above="@id/layout_bottom"
+        android:text="@string/assistant_is_typing"
+        android:layout_marginLeft="4pt"
+        android:background="#f4f6f7" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/layout_bottom"
+        android:layout_above="@id/bottomNavigation"
+        android:background="#f4f6f7" >
+
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginStart="4pt"
+            android:layout_marginEnd="2pt"
+            android:layout_marginBottom="4pt"
+            android:elevation="2pt"
+            android:background="@drawable/bg_type"
+            android:layout_toStartOf="@+id/btnSend"
+            android:layout_centerVertical="true"
+            >
+            <androidx.appcompat.widget.AppCompatEditText
+                android:id="@+id/edChat"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:minHeight="24pt"
+                android:layout_marginStart="10pt"
+                android:layout_marginEnd="10pt"
+                android:background="#fff"
+                android:hint=" Type a Message"
+                android:textSize="18sp"/>
+        </RelativeLayout>
+
+        <RelativeLayout
+            android:id="@+id/btnSend"
+            android:layout_width="24pt"
+            android:layout_height="24pt"
+            android:layout_alignParentEnd="true"
+            android:background="@drawable/sendbutton"
+            android:layout_marginBottom="4pt"
+            android:layout_marginEnd="2pt"
+            android:elevation="2pt"
+            android:layout_centerInParent="true"
+            >
+            <androidx.appcompat.widget.AppCompatImageView
+                android:id="@+id/fab_img"
+                android:layout_width="12pt"
+                android:layout_height="12pt"
+                android:layout_centerInParent="true"
+                android:src="@drawable/ic_send_white_24dp"
+                android:tint="#fff"/>
+        </RelativeLayout>
+
+    </RelativeLayout>
+
+    <com.google.android.material.bottomnavigation.BottomNavigationView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/bottomNavigation"
+        android:layout_alignParentBottom="true"
+        android:background="?android:attr/windowBackground"
+        app:itemIconTint="@color/bottom_nav_icon_color_selector"
+        app:menu="@menu/bottom_navigation_menu"
+        app:theme="@style/BottomNavigationTheme"
+        app:itemBackground="@color/colorBackgroundBottomNavigation"
+        android:backgroundTint="@color/colorBackgroundBottomNavigation"/>
+
+</RelativeLayout>

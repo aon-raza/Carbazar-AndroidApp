@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+<!--    <color name="colorPrimary">#38598b</color>-->
+    <color name="colorPrimary">#c43b3b</color>
+<!--    <color name="colorPrimaryDark">#113f67</color>-->
+    <color name="colorPrimaryDark">#c43b3b</color>
+<!--    <color name="colorAccent">#a2a8d3</color>-->
+<!--    <color name="colorAccent">#fa9898</color>-->
+    <color name="colorAccent">#c43b3b</color>
+    <color name="colorBackgroundBottomNavigation">#202123</color>
+    <color name="colorItemBottomNav">#ffffff</color>
+    <color name="colorIconsAR">#969696</color>
+    <color name="colorTransparent">#80000000</color>
+</resources>

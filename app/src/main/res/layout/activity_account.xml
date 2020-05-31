@@ -1,0 +1,235 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".account"
+    android:background="#f2f2f2">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar"
+        android:layout_above="@+id/bottomNavigation"
+        android:background="#fff"
+        android:layout_margin="2pt">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RL_others_profile"
+            android:clickable="true"
+            android:background="#ffffff"
+            android:focusableInTouchMode="true">
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40pt"
+                android:layout_height="40pt"
+                android:id="@+id/user_image0"
+                android:scaleType="centerCrop"
+                android:layout_margin="4pt"
+                app:civ_circle_background_color="#f2f2f2"
+                android:src="@drawable/profile_picture"/>
+
+            <de.hdodenhof.circleimageview.CircleImageView
+                android:layout_width="40pt"
+                android:layout_height="40pt"
+                android:id="@+id/user_image"
+                android:scaleType="centerCrop"
+                android:layout_margin="4pt"
+                app:civ_circle_background_color="#f2f2f2"
+                android:src="@drawable/profile_picture"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/name_of_user"
+                android:id="@+id/user_name"
+                android:textSize="12pt"
+                android:textColor="#000000"
+                android:layout_toEndOf="@+id/user_image"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/view_and_edit_profile"
+                android:id="@+id/viewAndEdit"
+                android:textColor="@color/colorPrimary"
+                android:textSize="9pt"
+                android:textStyle="italic"
+                android:gravity="center_vertical"
+                android:layout_toEndOf="@+id/user_image"
+                android:layout_below="@+id/user_name"
+                android:layout_marginTop="2pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space1"
+                android:layout_below="@+id/user_image"
+                android:layout_marginTop="12pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/saved_ads1"
+                android:id="@+id/savedAdsBtn"
+                android:layout_below="@id/space1"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/favorite"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space2"
+                android:layout_below="@+id/savedAdsBtn"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/p1"
+                android:id="@+id/privacyBtn"
+                android:layout_below="@id/space2"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/privacy"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space3"
+                android:layout_below="@+id/privacyBtn"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/notifications"
+                android:id="@+id/notificationsBtn"
+                android:layout_below="@id/space3"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/notifictions"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space4"
+                android:layout_below="@+id/notificationsBtn"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/contact_us"
+                android:id="@+id/contactBtn"
+                android:layout_below="@id/space4"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/contact"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space5"
+                android:layout_below="@+id/contactBtn"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/help_guidelines"
+                android:id="@+id/helpAndGuidelineBtn"
+                android:layout_below="@id/space5"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/help"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space6"
+                android:layout_below="@+id/helpAndGuidelineBtn"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rate_app"
+                android:id="@+id/rateBtn"
+                android:layout_below="@id/space6"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/rate"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space7"
+                android:layout_below="@+id/rateBtn"
+                android:layout_marginTop="6pt"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+        <com.google.android.material.bottomnavigation.BottomNavigationView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/bottomNavigation"
+            android:layout_alignParentBottom="true"
+            android:background="?android:attr/windowBackground"
+            app:itemIconTint="@color/bottom_nav_icon_color_selector"
+            app:menu="@menu/bottom_navigation_menu"
+            app:theme="@style/BottomNavigationTheme"
+            app:itemBackground="@color/colorBackgroundBottomNavigation"
+            android:backgroundTint="@color/colorBackgroundBottomNavigation"/>
+
+</RelativeLayout>

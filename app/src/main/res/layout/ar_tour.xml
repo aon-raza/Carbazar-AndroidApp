@@ -1,0 +1,95 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".ARTour">
+    <fragment
+        android:id="@+id/sceneform_ux_fragment"
+        android:name="com.google.ar.sceneform.ux.ArFragment"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/downBtn"
+        android:src="@drawable/down"
+        android:padding="2pt"
+        android:layout_marginBottom="4pt"
+        android:layout_alignParentBottom="true"
+        android:layout_toLeftOf="@+id/rightBtn"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rightBtn"
+        android:src="@drawable/right"
+        android:padding="2pt"
+        android:layout_marginRight="4pt"
+        android:layout_alignParentRight="true"
+        android:layout_above="@+id/downBtn"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/leftBtn"
+        android:src="@drawable/left"
+        android:padding="2pt"
+        android:layout_toLeftOf="@+id/downBtn"
+        android:layout_above="@+id/downBtn"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/upBtn"
+        android:src="@drawable/up"
+        android:padding="2pt"
+        android:layout_above="@+id/rightBtn"
+        android:layout_toLeftOf="@+id/rightBtn"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rotateRightBtn"
+        android:src="@drawable/rotate_right"
+        android:padding="2pt"
+        android:layout_above="@+id/upBtn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="4pt"
+        android:layout_marginBottom="16pt"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/rotateLeftBtn"
+        android:src="@drawable/rotate_left"
+        android:padding="2pt"
+        android:layout_above="@+id/rotateRightBtn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="4pt"
+        android:layout_marginBottom="4pt"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/zoomOutBtn"
+        android:src="@drawable/zoom_out"
+        android:padding="2pt"
+        android:layout_above="@+id/rotateLeftBtn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="4pt"
+        android:layout_marginBottom="8pt"/>
+
+    <androidx.appcompat.widget.AppCompatImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:id="@+id/zoomInBtn"
+        android:src="@drawable/zoom_in"
+        android:padding="2pt"
+        android:layout_above="@+id/zoomOutBtn"
+        android:layout_alignParentRight="true"
+        android:layout_marginRight="4pt"
+        android:layout_marginBottom="4pt"/>
+</RelativeLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="#fff"
+    tools:context=".privacy">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@+id/toolbar"
+        android:background="#fff">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:focusable="true"
+            android:background="#fff"
+            android:focusableInTouchMode="true">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:id="@+id/number_in_ads_label"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="16pt"
+                android:gravity="center_vertical"
+                android:text="@string/show_my_phone_number_in_ads"
+                android:textColor="#000"
+                android:textSize="8pt"
+                android:textStyle="bold" />
+
+            <androidx.appcompat.widget.SwitchCompat
+                android:id="@+id/number_in_ads_switch"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_alignParentEnd="true"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="16pt" />
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="1pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space1"
+                android:layout_below="@+id/number_in_ads_label"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@+id/space1"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="16pt"
+                android:background="#cccccc">
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_margin="1pt"
+                    android:background="#fff">
+
+                    <androidx.appcompat.widget.AppCompatTextView
+                        android:id="@+id/change_password_label"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginHorizontal="4pt"
+                        android:layout_marginTop="4pt"
+                        android:gravity="center_vertical"
+                        android:text="@string/change_password1"
+                        android:textColor="@color/colorPrimary"
+                        android:textSize="8pt"
+                        android:textStyle="bold" />
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/new_password_Layout"
+                        android:layout_below="@+id/change_password_label"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxCornerRadiusBottomEnd="0pt"
+                        app:boxCornerRadiusBottomStart="0pt"
+                        app:boxCornerRadiusTopEnd="0pt"
+                        app:boxCornerRadiusTopStart="0pt"
+                        android:layout_marginHorizontal="4pt"
+                        android:layout_marginTop="4pt">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/new_password_field"
+                            android:hint="@string/np2"
+                            android:inputType="textPassword"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <com.google.android.material.textfield.TextInputLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/confirm_new_password_Layout"
+                        android:layout_below="@+id/new_password_Layout"
+                        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+                        app:boxCornerRadiusBottomEnd="0pt"
+                        app:boxCornerRadiusBottomStart="0pt"
+                        app:boxCornerRadiusTopEnd="0pt"
+                        app:boxCornerRadiusTopStart="0pt"
+                        android:layout_marginHorizontal="4pt"
+                        android:layout_marginTop="4pt"
+                        android:layout_marginBottom="4pt">
+
+                        <androidx.appcompat.widget.AppCompatEditText
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:id="@+id/confirm_new_password_field"
+                            android:hint="@string/confirm_password"
+                            android:inputType="textPassword"/>
+
+                    </com.google.android.material.textfield.TextInputLayout>
+
+                    <androidx.appcompat.widget.AppCompatButton
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:id="@+id/change_password_btn"
+                        android:text="@string/change_password1"
+                        android:textColor="#ffffff"
+                        android:gravity="center"
+                        android:inputType="text"
+                        android:background="@color/colorPrimaryDark"
+                        android:layout_below="@+id/confirm_new_password_Layout"
+                        android:layout_marginHorizontal="4pt"
+                        android:layout_marginTop="4pt"
+                        android:layout_marginBottom="4pt"
+                        android:paddingHorizontal="4pt"
+                        android:paddingVertical="4pt" />
+
+
+
+                </RelativeLayout>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+    </ScrollView>
+</RelativeLayout>
