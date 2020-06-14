@@ -10,6 +10,7 @@ public class user {
     private String id;
     private String token;
     private String role;
+    private String photo;
 
     public user() {
     }
@@ -84,5 +85,13 @@ public class user {
 
     public void setRole(String role) {
         this.role = role;
+    }
+
+    public String getPhoto() {
+        return photo;
+    }
+
+    public void setPhoto(String photo) {
+        this.photo = photo;
     }
 }

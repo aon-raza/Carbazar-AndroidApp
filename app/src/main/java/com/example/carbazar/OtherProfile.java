@@ -131,10 +131,38 @@ public class OtherProfile extends AppCompatActivity implements BottomNavigationV
 
             user_name.setText(posterName);
             role.setText(posterRole);
-            Glide.with(this)
-                    .asBitmap()
-                    .load(common.ip + "/user/photo/" + posterID+"?"+new Date().getTime())
-                    .into(user_image);
+            String token = "Bearer "+common.currentUser.getToken();
+//            if (posterID == null){
+//                posterID = common.currentUser.getId().replaceAll(" ","");
+//            }
+            compositeDisposable.add(iMyService.profile(token,posterID)
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Object>() {
+                        @Override
+                        public void accept(Object s) throws Exception {
+                            String response = "";
+                            //my own
+                            JSONObject jsonObject = new JSONObject(JSON.serialize(s));
+                            //String saint = jsonObject.getString("email");
+                            if (jsonObject.has("photo")){
+                                Glide.with(getApplicationContext())
+                                        .asBitmap()
+                                        .load(jsonObject.getString("photo"))
+                                        .into(user_image);
+                            }
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Toast.makeText(OtherProfile.this, "Server Error!" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }));
+
+//            Glide.with(this)
+//                    .asBitmap()
+//                    .load(common.ip + "/user/photo/" + posterID+"?"+new Date().getTime())
+//                    .into(user_image);
 
             ads_label.setText(posterName+"'s Ads");
             buyers_ads_label.setText(posterName+"'s Buyer Ads");
@@ -436,11 +464,19 @@ public class OtherProfile extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    public void onpostClick(String postID) {
-        Intent intent = new Intent(OtherProfile.this, detailedPostCarBazar.class);
-        intent.putExtra("postID", postID);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    public void onpostClick(String postID, String postType) {
+        if (postType.contentEquals("Seller")){
+            Intent intent = new Intent(OtherProfile.this, detailedPostCarBazar.class);
+            intent.putExtra("postID", postID);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
+        else if (postType.contentEquals("Buyer")){
+            Intent intent2 = new Intent(OtherProfile.this, detailedBuyerPost.class);
+            intent2.putExtra("postID", postID);
+            startActivity(intent2);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
     }
 
     private void initRecyclerView(){

@@ -1,0 +1,358 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".detailedBuyerPost"
+    android:background="#f2f2f2">
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_alignParentTop="true"
+        android:layout_above="@+id/contact_seller_btn"
+        android:background="#f2f2f2">
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content">
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/topLayout"
+                android:background="#fff">
+
+                <androidx.viewpager.widget.ViewPager
+                    android:layout_width="match_parent"
+                    android:id="@+id/view_pager"
+                    android:layout_height="150pt"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="110pt"
+                    android:layout_marginStart="10pt"
+                    android:layout_alignParentStart="true"
+                    android:src="@drawable/image_left"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="110pt"
+                    android:layout_marginEnd="10pt"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/image_right"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/rs_300_000_000"
+                    android:id="@+id/car_price"
+                    android:textSize="10pt"
+                    android:textStyle="bold"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_below="@+id/view_pager"
+                    android:layout_marginTop="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatImageView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/favorite"
+                    android:layout_below="@+id/view_pager"
+                    android:layout_marginTop="4pt"
+                    android:gravity="center_vertical"
+                    android:layout_marginHorizontal="4pt"
+                    android:layout_alignParentEnd="true"
+                    android:src="@drawable/unfavorite"/>
+
+                <androidx.appcompat.widget.AppCompatSpinner
+                    android:id="@+id/editDeleteSpinner"
+                    android:layout_below="@+id/view_pager"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="@drawable/gradient_editdelete_spinner"
+                    android:layout_marginTop="4pt"
+                    android:gravity="center_vertical"
+                    android:layout_marginHorizontal="4pt"
+                    android:layout_alignParentEnd="true"
+                    android:drawSelectorOnTop="true"
+                    android:tooltipText="@string/eod" />
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/title"
+                    android:id="@+id/post_title"
+                    android:gravity="center_vertical"
+                    android:textSize="9pt"
+                    android:textStyle="italic"
+                    android:textColor="#000"
+                    android:layout_below="@+id/car_price"
+                    android:layout_marginTop="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/location"
+                    android:id="@+id/location"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/post_title"
+                    android:layout_toStartOf="@+id/post_date"
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="2pt"
+                    android:layout_marginHorizontal="4pt"
+                    android:layout_marginBottom="2pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/dateee"
+                    android:id="@+id/post_date"
+                    android:gravity="center_vertical"
+                    android:layout_below="@+id/post_title"
+                    android:layout_marginTop="2pt"
+                    android:layout_alignParentRight="true"
+                    android:layout_marginHorizontal="4pt"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/secondLayout"
+                android:layout_below="@+id/topLayout"
+                android:layout_marginTop="2pt"
+                android:background="#fff">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/details1"
+                    android:id="@+id/details_label"
+                    android:gravity="center_vertical"
+                    android:textSize="8pt"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:layout_marginTop="16pt"
+                    android:layout_marginBottom="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/make1"
+                    android:id="@+id/make_label"
+                    android:layout_below="@+id/details_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/model1"
+                    android:id="@+id/model_label"
+                    android:layout_below="@+id/make_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year2"
+                    android:id="@+id/year_label"
+                    android:layout_below="@+id/model_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kms_driven11"
+                    android:id="@+id/KMDriven_label"
+                    android:layout_below="@+id/year_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/engine_capacity2"
+                    android:id="@+id/engine_capacity_label"
+                    android:layout_below="@+id/KMDriven_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginStart="4pt"
+                    android:layout_marginEnd="12pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/make1"
+                    android:id="@+id/make"
+                    android:layout_toRightOf="@+id/engine_capacity_label"
+                    android:textColor="#000"
+                    android:layout_below="@+id/details_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/model1"
+                    android:id="@+id/model"
+                    android:layout_toRightOf="@+id/engine_capacity_label"
+                    android:textColor="#000"
+                    android:layout_below="@+id/make_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/year2"
+                    android:id="@+id/year"
+                    android:layout_toRightOf="@+id/engine_capacity_label"
+                    android:textColor="#000"
+                    android:layout_below="@+id/model_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/kms_driven11"
+                    android:id="@+id/KMDriven"
+                    android:layout_toRightOf="@+id/engine_capacity_label"
+                    android:textColor="#000"
+                    android:layout_below="@+id/year_label"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/engine_capacity2"
+                    android:id="@+id/engine_capacity"
+                    android:layout_toRightOf="@+id/engine_capacity_label"
+                    android:textColor="#000"
+                    android:layout_below="@+id/KMDriven"
+                    android:gravity="center_vertical"
+                    android:layout_marginVertical="4pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/seller_info_layout"
+                android:layout_below="@+id/secondLayout"
+                android:layout_marginTop="2pt"
+                android:background="#fff">
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/buyer_profile"
+                    android:id="@+id/seller_profile_label"
+                    android:gravity="center_vertical"
+                    android:textSize="8pt"
+                    android:textStyle="bold"
+                    android:textColor="#000"
+                    android:layout_marginTop="16pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="24pt"
+                    android:layout_height="24pt"
+                    android:id="@+id/user_image0"
+                    android:layout_below="@+id/seller_profile_label"
+                    android:scaleType="centerCrop"
+                    app:civ_circle_background_color="#f2f2f2"
+                    android:layout_marginTop="4pt"
+                    android:layout_marginBottom="8pt"
+                    android:layout_marginStart="4pt"
+                    android:src="@drawable/profile_picture"/>
+
+                <de.hdodenhof.circleimageview.CircleImageView
+                    android:layout_width="24pt"
+                    android:layout_height="24pt"
+                    android:id="@+id/user_image"
+                    android:layout_below="@+id/seller_profile_label"
+                    android:scaleType="centerCrop"
+                    app:civ_circle_background_color="#f2f2f2"
+                    android:layout_marginTop="4pt"
+                    android:layout_marginBottom="4pt"
+                    android:layout_marginStart="4pt"
+                    android:src="@drawable/profile_picture"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/un"
+                    android:id="@+id/user_name"
+                    android:textSize="8pt"
+                    android:gravity="center_vertical"
+                    android:textColor="#000"
+                    android:layout_toEndOf="@+id/user_image"
+                    android:layout_below="@+id/seller_profile_label"
+                    android:layout_marginTop="4.5pt"
+                    android:layout_marginBottom="1.5pt"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/view_profile2"
+                    android:id="@+id/view_profile_label"
+                    android:layout_below="@+id/user_name"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_toEndOf="@+id/user_image"
+                    android:layout_marginHorizontal="4pt"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:text="@string/show_phone_number"
+                    android:id="@+id/ShowPhoneNumber"
+                    android:textStyle="italic"
+                    android:textSize="10pt"
+                    android:layout_below="@+id/user_image"
+                    android:gravity="center_vertical"
+                    android:textColor="@color/colorPrimary"
+                    android:layout_marginHorizontal="4pt"
+                    android:layout_marginBottom="8pt"/>
+
+            </RelativeLayout>
+
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+    <androidx.appcompat.widget.AppCompatButton
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/contact_seller_btn"
+        android:text="@string/contact_buyer"
+        android:inputType="text"
+        android:textColor="#ffffff"
+        android:gravity="center"
+        android:background="@color/colorPrimaryDark"
+        android:layout_alignParentBottom="true"/>
+
+</RelativeLayout>

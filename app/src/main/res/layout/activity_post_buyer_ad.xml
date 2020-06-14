@@ -103,8 +103,19 @@
             <Spinner
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/KMDrivenSpinnerSelection"
+                android:id="@+id/priceRangeSpinnerSelection"
                 android:layout_below="@id/yearSpinnerSelection"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/priceRAnge"
+                android:drawSelectorOnTop="true"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/KMDrivenSpinnerSelection"
+                android:layout_below="@id/priceRangeSpinnerSelection"
                 android:background="@drawable/gradient_spinner"
                 android:layout_marginHorizontal="8pt"
                 android:layout_marginVertical="8pt"

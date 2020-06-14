@@ -66,6 +66,7 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
     private Spinner selectMake;
     private Spinner selectModel;
     private Spinner selectYear;
+    private Spinner selectPriceRange;
     private Spinner KMDriven;
     private AppCompatImageView uploadPhotos;
     private Spinner engineCapacity;
@@ -75,6 +76,7 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
     List<String> makeSpinnerItems;
     List<String> modelSpinnerItems;
     List<String> yearSpinnerItems;
+    List<String> priceRangeSpinnerItems;
     List<String> KMDrivenSpinnerItems;
     List<String> engineCapacitySpinnerItems;
 
@@ -131,6 +133,7 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
         selectMake = findViewById(R.id.makeSpinnerSelection);
         selectModel = findViewById(R.id.modelSpinnerSelection);
         selectYear = findViewById(R.id.yearSpinnerSelection);
+        selectPriceRange = findViewById(R.id.priceRangeSpinnerSelection);
         KMDriven = findViewById(R.id.KMDrivenSpinnerSelection);
         uploadPhotos = findViewById(R.id.upload_photos);
         engineCapacity = findViewById(R.id.engineCapacitySpinnerSelection);
@@ -141,6 +144,7 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
         makeSpinnerItems = new ArrayList<String>();
         modelSpinnerItems = new ArrayList<String>();
         yearSpinnerItems = new ArrayList<String>();
+        priceRangeSpinnerItems = new ArrayList<String>();
         KMDrivenSpinnerItems = new ArrayList<String>();
         engineCapacitySpinnerItems = new ArrayList<String>();
         getDataInMakeSpinner();
@@ -746,6 +750,37 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
         selectYear.setAdapter(adapter);
 
+        priceRangeSpinnerItems.add("Select Price Range *");
+        priceRangeSpinnerItems.add(".....");
+        priceRangeSpinnerItems.add("100,000 - 150,000");
+        priceRangeSpinnerItems.add("150,000 - 200,000");
+        priceRangeSpinnerItems.add("200,000 - 250,000");
+        priceRangeSpinnerItems.add("250,000 - 300,000");
+        priceRangeSpinnerItems.add("300,000 - 350,000");
+        priceRangeSpinnerItems.add("350,000 - 400,000");
+        priceRangeSpinnerItems.add("400,000 - 450,000");
+        priceRangeSpinnerItems.add("450,000 - 500,000");
+        priceRangeSpinnerItems.add("500,000 - 600,000");
+        priceRangeSpinnerItems.add("600,000 - 700,000");
+        priceRangeSpinnerItems.add("700,000 - 800,000");
+        priceRangeSpinnerItems.add("800,000 - 900,000");
+        priceRangeSpinnerItems.add("900,000 - 1,000,000");
+        priceRangeSpinnerItems.add("1,000,000 - 1,200,000");
+        priceRangeSpinnerItems.add("1,200,000 - 1,400,000");
+        priceRangeSpinnerItems.add("1,400,000 - 1,600,000");
+        priceRangeSpinnerItems.add("1,600,000 - 1,800,000");
+        priceRangeSpinnerItems.add("1,800,000 - 2,000,000");
+        priceRangeSpinnerItems.add("2,000,000 - 2,500,000");
+        priceRangeSpinnerItems.add("2,500,000 - 3,000,000");
+        priceRangeSpinnerItems.add("3,000,000 - 3,500,000");
+        priceRangeSpinnerItems.add("3,500,000 - 4,000,000");
+        priceRangeSpinnerItems.add("4,000,000 - 5,000,000");
+        priceRangeSpinnerItems.add("5,000,000 - 10,000,000");
+        adapter = new ArrayAdapter<String>(getApplicationContext(),
+                R.layout.spinner_layout, priceRangeSpinnerItems);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectPriceRange.setAdapter(adapter);
+
         KMDrivenSpinnerItems.add("Select KM Driven *");
         KMDrivenSpinnerItems.add(".....");
         KMDrivenSpinnerItems.add("0 - 25,000");
@@ -905,6 +940,15 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
             return;
         }
 
+        if(selectPriceRange.getSelectedItemPosition() == 0 || selectPriceRange.getSelectedItemPosition() == 1){
+            Toast.makeText(postBuyerAd.this, "Select Price Range",Toast.LENGTH_SHORT).show();
+            selectPriceRange.setFocusable(true);
+            selectPriceRange.setFocusableInTouchMode(true);
+            selectPriceRange.requestFocus();
+            selectPriceRange.performClick();
+            return;
+        }
+
         if(KMDriven.getSelectedItemPosition() == 0 || KMDriven.getSelectedItemPosition() == 1){
             Toast.makeText(postBuyerAd.this, "Select KMs Driven",Toast.LENGTH_SHORT).show();
             KMDriven.setFocusable(true);
@@ -933,6 +977,9 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
             return;
         }
 
+        mDialog.setMessage("Please wait...");
+        mDialog.show();
+
         File imageFile1 = new File(getImageFilePath(imagesEncodedList.get(0)));
 
         RequestBody requestFile1 =
@@ -955,11 +1002,14 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
         RequestBody year =
                 RequestBody.create(MediaType.parse("multipart/form-data"), selectYear.getSelectedItem().toString());
 
+        RequestBody priceRange =
+                RequestBody.create(MediaType.parse("multipart/form-data"), selectPriceRange.getSelectedItem().toString());
+
         RequestBody kmDriven1 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), KMDriven.getSelectedItem().toString());
 
-        RequestBody price1 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), " ");
+//        RequestBody price1 =
+//                RequestBody.create(MediaType.parse("multipart/form-data"), " ");
 
         RequestBody engineCapacity1 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), engineCapacity.getSelectedItem().toString());
@@ -979,7 +1029,7 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
                 model,
                 year,
                 kmDriven1,
-                price1,
+                priceRange,
                 engineCapacity1,
                 photos,
                 condition)
@@ -1000,6 +1050,7 @@ public class postBuyerAd extends AppCompatActivity implements BottomNavigationVi
                             Toast.makeText(postBuyerAd.this,""+response, Toast.LENGTH_SHORT).show();
                         }
                         else {
+                            mDialog.dismiss();
                             Toast.makeText(postBuyerAd.this, "Ad Posted.", Toast.LENGTH_SHORT).show();
                             Intent intent1 = new Intent(postBuyerAd.this, postBuyerAd.class);
                             startActivity(intent1);

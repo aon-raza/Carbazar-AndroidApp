@@ -524,7 +524,7 @@ public class chatbot extends AppCompatActivity implements BottomNavigationView.O
     }
 
     @Override
-    public void onpostClick(String postID) {
+    public void onpostClick(String postID, String postType) {
 
     }
 

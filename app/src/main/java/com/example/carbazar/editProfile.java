@@ -149,10 +149,10 @@ public class editProfile extends AppCompatActivity implements BottomNavigationVi
                 mDialog.setMessage("Please wait...");
                 mDialog.show();
 
-                Glide.with(this)
-                        .asBitmap()
-                        .load(common.ip + "/user/photo/" + common.currentUser.getId().replaceAll(" ", "")+"?"+new Date().getTime())
-                        .into(profileImage);
+//                Glide.with(this)
+//                        .asBitmap()
+//                        .load(common.currentUser.getPhoto())
+//                        .into(profileImage);
                 String token = "Bearer "+common.currentUser.getToken();
                 String id = common.currentUser.getId().replaceAll(" ","");
                 compositeDisposable.add(iMyService.profile(token,id)
@@ -180,6 +180,14 @@ public class editProfile extends AppCompatActivity implements BottomNavigationVi
                                 common.currentUser.setName(jsonObject.getString("name"));
                                 common.currentUser.setEmail(jsonObject.getString("email"));
                                 common.currentUser.setPhone(jsonObject.getString("phone"));
+                                if (jsonObject.has("photo")){
+                                    common.currentUser.setPhoto(jsonObject.getString("photo"));
+
+                                    Glide.with(getApplicationContext())
+                                            .asBitmap()
+                                            .load(jsonObject.getString("photo"))
+                                            .into(profileImage);
+                                }
 
                                 name.setText(jsonObject.getString("name"));
                                 email.setText(jsonObject.getString("email"));

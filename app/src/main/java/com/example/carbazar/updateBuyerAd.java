@@ -5,24 +5,19 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
 import androidx.appcompat.widget.AppCompatImageView;
-import androidx.appcompat.widget.AppCompatTextView;
 import androidx.appcompat.widget.Toolbar;
-import androidx.core.app.ActivityCompat;
 
-import android.Manifest;
 import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.ClipData;
 import android.content.Context;
 import android.content.Intent;
-import android.content.pm.PackageManager;
 import android.database.Cursor;
 import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.net.ConnectivityManager;
 import android.net.NetworkInfo;
 import android.net.Uri;
-import android.os.Build;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.util.Log;
@@ -35,6 +30,7 @@ import android.widget.RelativeLayout;
 import android.widget.Spinner;
 import android.widget.Toast;
 
+import com.bumptech.glide.Glide;
 import com.example.carbazar.Models.common;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.mongodb.util.JSON;
@@ -56,11 +52,11 @@ import okhttp3.MultipartBody;
 import okhttp3.RequestBody;
 import retrofit2.Retrofit;
 
-public class UpdateAd extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+public class updateBuyerAd extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener{
+
     private BottomNavigationView bottomNavigationView;
     private RelativeLayout RLMain;
     private Toolbar toolbar;
-    static final Integer READ_STORAGE_PERMISSION_REQUEST_CODE=0x3;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     IMyService iMyService;
@@ -71,49 +67,33 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
     private Spinner city;
     private Spinner selectMake;
     private Spinner selectModel;
-    private Spinner selectRegCity;
     private Spinner selectYear;
+    private Spinner selectPriceRange;
     private Spinner KMDriven;
-    private Spinner selectExteriorColor;
-    private AppCompatEditText price;
-    private AppCompatEditText description;
     private AppCompatImageView uploadPhotos;
-    private Spinner selectEngineType;
-    private Spinner selectTransmission;
-    private Spinner selectAssembly;
     private Spinner engineCapacity;
     private AppCompatButton postBtn;
 
     List<String> citySpinnerItems;
     List<String> makeSpinnerItems;
     List<String> modelSpinnerItems;
-    List<String> regCitySpinnerItems;
     List<String> yearSpinnerItems;
+    List<String> priceRangeSpinnerItems;
     List<String> KMDrivenSpinnerItems;
-    List<String> exteriorColorSpinnerItems;
-    List<String> engineTypeSpinnerItems;
-    List<String> transmissionSpinnerItems;
-    List<String> assemblyColorSpinnerItems;
     List<String> engineCapacitySpinnerItems;
 
     int PICK_IMAGE_MULTIPLE = 1;
     Uri imageEncoded;
     List<Uri> imagesEncodedList;
 
-    private AppCompatImageView upload_video;
-    private AppCompatTextView video_title_Label;
-    static final int REQUEST_TAKE_GALLERY_VIDEO = 300;
-    private String VideoPath = null;
-
     private String postID;
     private ArrayList<String> listForUpdate;
     private ArrayList<String> imagesForUpdate;
-    private ArrayList<String> videoForUpdate;
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_post_ad);
+        setContentView(R.layout.activity_post_buyer_ad);
 
         Bundle extras = getIntent().getExtras();
         if(extras!= null){
@@ -121,16 +101,9 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 
             listForUpdate = extras.getStringArrayList("listForUpdate");
             imagesForUpdate = extras.getStringArrayList("imagesForUpdate");
-            videoForUpdate = extras.getStringArrayList("videoForUpdate");
         }
 
-        if(common.currentUser == null){
-            Toast.makeText(UpdateAd.this, "Sign in first", Toast.LENGTH_SHORT).show();
-            Intent intent3 = new Intent(UpdateAd.this, signin.class);
-            startActivity(intent3);
-            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-            finish();
-        }
+
         bottomNavigationView = findViewById(R.id.bottomNavigation);
         bottomNavigationView.setOnNavigationItemSelectedListener(this);
         android.view.Menu menu = bottomNavigationView.getMenu();
@@ -140,7 +113,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
-        getSupportActionBar().setTitle("Update Ad");
+        getSupportActionBar().setTitle("Buyer Ad");
 
         RLMain = findViewById(R.id.RL_Main);
 
@@ -166,7 +139,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
                 }
             }
         });
-        mDialog = new ProgressDialog(UpdateAd.this);
+        mDialog = new ProgressDialog(updateBuyerAd.this);
 
         Retrofit retrofit = RetrofitClient.getInstance();
         iMyService = retrofit.create(IMyService.class);
@@ -176,40 +149,31 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         city = findViewById(R.id.citySpinnerSelection);
         selectMake = findViewById(R.id.makeSpinnerSelection);
         selectModel = findViewById(R.id.modelSpinnerSelection);
-        selectRegCity = findViewById(R.id.regCitySpinnerSelection);
         selectYear = findViewById(R.id.yearSpinnerSelection);
+        selectPriceRange = findViewById(R.id.priceRangeSpinnerSelection);
         KMDriven = findViewById(R.id.KMDrivenSpinnerSelection);
-        selectExteriorColor = findViewById(R.id.exteriorColorSpinnerSelection);
-        price = findViewById(R.id.price_field);
-        price.setText(listForUpdate.get(8));
-        description = findViewById(R.id.description_field);
-        description.setText(listForUpdate.get(9));
         uploadPhotos = findViewById(R.id.upload_photos);
-        selectEngineType = findViewById(R.id.engTypeSpinnerSelection);
-        selectTransmission = findViewById(R.id.transmissionSpinnerSelection);
-        selectAssembly = findViewById(R.id.assemblySpinnerSelection);
+        Glide.with(this)
+                .asBitmap()
+                .load(imagesForUpdate.get(0))
+                .into(uploadPhotos);
         engineCapacity = findViewById(R.id.engineCapacitySpinnerSelection);
         postBtn = findViewById(R.id.post_btn);
         postBtn.setText("Update");
 
-        upload_video = findViewById(R.id.upload_video);
-        video_title_Label = findViewById(R.id.video_title_Label);
 
         citySpinnerItems = new ArrayList<String>();
         makeSpinnerItems = new ArrayList<String>();
         modelSpinnerItems = new ArrayList<String>();
-        regCitySpinnerItems = new ArrayList<String>();
         yearSpinnerItems = new ArrayList<String>();
+        priceRangeSpinnerItems = new ArrayList<String>();
         KMDrivenSpinnerItems = new ArrayList<String>();
-        exteriorColorSpinnerItems = new ArrayList<String>();
-        engineTypeSpinnerItems = new ArrayList<String>();
-        transmissionSpinnerItems = new ArrayList<String>();
-        assemblyColorSpinnerItems = new ArrayList<String>();
         engineCapacitySpinnerItems = new ArrayList<String>();
         getDataInMakeSpinner();
         getDataInOtherSpinners();
 
         getDataInModelSpinner(listForUpdate.get(2));
+
         selectMake.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
@@ -229,8 +193,8 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
             public void onClick(View v) {
                 if(isOnline()){
                     if(common.currentUser == null){
-                        Toast.makeText(UpdateAd.this, "Sign in first", Toast.LENGTH_SHORT).show();
-                        Intent intent3 = new Intent(UpdateAd.this, signin.class);
+                        Toast.makeText(updateBuyerAd.this, "Sign in first", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(updateBuyerAd.this, signin.class);
                         startActivity(intent3);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
@@ -238,7 +202,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
                         sendData();
                     }
                 }else{
-                    Toast.makeText(UpdateAd.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(updateBuyerAd.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
                 }
             }
         });
@@ -246,17 +210,6 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         uploadPhotos.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!checkPermissionForReadExtertalStorage()){
-                    new Thread(new Runnable() {
-                        public void run() {
-                            try {
-                                requestPermissionForReadExtertalStorage();
-                            } catch (Exception e) {
-                                e.printStackTrace();
-                            }
-                        }
-                    }).start();
-                }
                 Intent intent = new Intent();
                 intent.setType("image/*");
                 intent.putExtra(Intent.EXTRA_ALLOW_MULTIPLE, true);
@@ -264,48 +217,14 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
                 startActivityForResult(Intent.createChooser(intent,"Select Picture"), PICK_IMAGE_MULTIPLE);
             }
         });
-
-        upload_video.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent();
-                intent.setType("video/*");
-                intent.setAction(Intent.ACTION_GET_CONTENT);
-                startActivityForResult(Intent.createChooser(intent,"Select Video"),REQUEST_TAKE_GALLERY_VIDEO);
-            }
-        });
     }
-
-    @Override
-    public boolean onCreateOptionsMenu(android.view.Menu menu) {
-        getMenuInflater().inflate(R.menu.toolbar_menu_post_ad,menu);
-        return true;
-    }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
-
         switch (item.getItemId()) {
             case android.R.id.home:
-                Intent intent1 = new Intent(UpdateAd.this, MainActivity.class);
-                startActivity(intent1);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 finish();
-                return true;
-
-            case R.id.threedotsBTN_actionBar:
-                Intent intent2 = new Intent(UpdateAd.this, postBuyerAd.class);
-                startActivity(intent2);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
-                return true;
-
-            case R.id.myAdsBTN_actionBar:
-                Intent intent3 = new Intent(UpdateAd.this, myAds.class);
-                startActivity(intent3);
-                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
-                finish();
                 return true;
 
             default:
@@ -315,10 +234,8 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 
     @Override
     public void onBackPressed() {
-        Intent intent1 = new Intent(UpdateAd.this, MainActivity.class);
-        startActivity(intent1);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
         finish();
+        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
     }
 
     private void getDataInMakeSpinner(){
@@ -351,11 +268,11 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            Toast.makeText(UpdateAd.this, "Server Error!" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateBuyerAd.this, "Server Error!" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }));
         }else{
-            Toast.makeText(UpdateAd.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -390,11 +307,11 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
                     }, new Consumer<Throwable>() {
                         @Override
                         public void accept(Throwable throwable) throws Exception {
-                            Toast.makeText(UpdateAd.this, "Server Error!" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateBuyerAd.this, "Server Error!" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
                         }
                     }));
         }else{
-            Toast.makeText(UpdateAd.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "No Internet Connection", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -800,41 +717,10 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         city.setAdapter(adapter);
         city.setSelection(2);
 
-        regCitySpinnerItems.add("Select Registration City *");
-        regCitySpinnerItems.add(".....");
-        regCitySpinnerItems.add(listForUpdate.get(4));
-        regCitySpinnerItems.add("Abbottabad");
-        regCitySpinnerItems.add("Dera Ghazi Khan");
-        regCitySpinnerItems.add("Dera Ismail Khan");
-        regCitySpinnerItems.add("Faisalabad");
-        regCitySpinnerItems.add("Gilgit");
-        regCitySpinnerItems.add("Gujranwala");
-        regCitySpinnerItems.add("Gujrat");
-        regCitySpinnerItems.add("Hyderabad");
-        regCitySpinnerItems.add("Islamabad");
-        regCitySpinnerItems.add("Karachi");
-        regCitySpinnerItems.add("Kohat");
-        regCitySpinnerItems.add("Lahore");
-        regCitySpinnerItems.add("Mianwali");
-        regCitySpinnerItems.add("Multan");
-        regCitySpinnerItems.add("Murree");
-        regCitySpinnerItems.add("Muzaffarabad");
-        regCitySpinnerItems.add("Peshawar");
-        regCitySpinnerItems.add("Quetta");
-        regCitySpinnerItems.add("Rawalpindi");
-        regCitySpinnerItems.add("Sargodha");
-        regCitySpinnerItems.add("Sialkot");
-
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.spinner_layout, regCitySpinnerItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectRegCity.setAdapter(adapter);
-        selectRegCity.setSelection(2);
-
 
         yearSpinnerItems.add("Select Year *");
         yearSpinnerItems.add(".....");
-        yearSpinnerItems.add(listForUpdate.get(5));
+        yearSpinnerItems.add(listForUpdate.get(4));
         yearSpinnerItems.add("2020");
         yearSpinnerItems.add("2019");
         yearSpinnerItems.add("2018");
@@ -892,6 +778,39 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         selectYear.setAdapter(adapter);
         selectYear.setSelection(2);
 
+        priceRangeSpinnerItems.add("Select Price Range *");
+        priceRangeSpinnerItems.add(".....");
+        priceRangeSpinnerItems.add(listForUpdate.get(5));
+        priceRangeSpinnerItems.add("100,000 - 150,000");
+        priceRangeSpinnerItems.add("150,000 - 200,000");
+        priceRangeSpinnerItems.add("200,000 - 250,000");
+        priceRangeSpinnerItems.add("250,000 - 300,000");
+        priceRangeSpinnerItems.add("300,000 - 350,000");
+        priceRangeSpinnerItems.add("350,000 - 400,000");
+        priceRangeSpinnerItems.add("400,000 - 450,000");
+        priceRangeSpinnerItems.add("450,000 - 500,000");
+        priceRangeSpinnerItems.add("500,000 - 600,000");
+        priceRangeSpinnerItems.add("600,000 - 700,000");
+        priceRangeSpinnerItems.add("700,000 - 800,000");
+        priceRangeSpinnerItems.add("800,000 - 900,000");
+        priceRangeSpinnerItems.add("900,000 - 1,000,000");
+        priceRangeSpinnerItems.add("1,000,000 - 1,200,000");
+        priceRangeSpinnerItems.add("1,200,000 - 1,400,000");
+        priceRangeSpinnerItems.add("1,400,000 - 1,600,000");
+        priceRangeSpinnerItems.add("1,600,000 - 1,800,000");
+        priceRangeSpinnerItems.add("1,800,000 - 2,000,000");
+        priceRangeSpinnerItems.add("2,000,000 - 2,500,000");
+        priceRangeSpinnerItems.add("2,500,000 - 3,000,000");
+        priceRangeSpinnerItems.add("3,000,000 - 3,500,000");
+        priceRangeSpinnerItems.add("3,500,000 - 4,000,000");
+        priceRangeSpinnerItems.add("4,000,000 - 5,000,000");
+        priceRangeSpinnerItems.add("5,000,000 - 10,000,000");
+        adapter = new ArrayAdapter<String>(getApplicationContext(),
+                R.layout.spinner_layout, priceRangeSpinnerItems);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        selectPriceRange.setAdapter(adapter);
+        selectPriceRange.setSelection(2);
+
         KMDrivenSpinnerItems.add("Select KM Driven *");
         KMDrivenSpinnerItems.add(".....");
         KMDrivenSpinnerItems.add(listForUpdate.get(6));
@@ -914,70 +833,9 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         KMDriven.setSelection(2);
 
 
-        exteriorColorSpinnerItems.add("Select Exterior Color *");
-        exteriorColorSpinnerItems.add(".....");
-        exteriorColorSpinnerItems.add(listForUpdate.get(7));
-        exteriorColorSpinnerItems.add("White");
-        exteriorColorSpinnerItems.add("Silver");
-        exteriorColorSpinnerItems.add("Black");
-        exteriorColorSpinnerItems.add("Grey");
-        exteriorColorSpinnerItems.add("Blue");
-        exteriorColorSpinnerItems.add("Gold");
-        exteriorColorSpinnerItems.add("Navy");
-        exteriorColorSpinnerItems.add("Bronze");
-        exteriorColorSpinnerItems.add("Burgundy");
-        exteriorColorSpinnerItems.add("Green");
-        exteriorColorSpinnerItems.add("Indigo");
-        exteriorColorSpinnerItems.add("Maroon");
-        exteriorColorSpinnerItems.add("Pink");
-        exteriorColorSpinnerItems.add("Red");
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.spinner_layout, exteriorColorSpinnerItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectExteriorColor.setAdapter(adapter);
-        selectExteriorColor.setSelection(2);
-
-
-        engineTypeSpinnerItems.add("Select Engine Type *");
-        engineTypeSpinnerItems.add(".....");
-        engineTypeSpinnerItems.add(listForUpdate.get(10));
-        engineTypeSpinnerItems.add("Petrol");
-        engineTypeSpinnerItems.add("CNG");
-        engineTypeSpinnerItems.add("Diesel");
-        engineTypeSpinnerItems.add("LPG");
-        engineTypeSpinnerItems.add("Hybrid");
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.spinner_layout, engineTypeSpinnerItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectEngineType.setAdapter(adapter);
-        selectEngineType.setSelection(2);
-
-
-        transmissionSpinnerItems.add("Select Transmission *");
-        transmissionSpinnerItems.add(".....");
-        transmissionSpinnerItems.add(listForUpdate.get(11));
-        transmissionSpinnerItems.add("Automatic");
-        transmissionSpinnerItems.add("Manual");
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.spinner_layout, transmissionSpinnerItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectTransmission.setAdapter(adapter);
-        selectTransmission.setSelection(2);
-
-        assemblyColorSpinnerItems.add("Select Assembly *");
-        assemblyColorSpinnerItems.add(".....");
-        assemblyColorSpinnerItems.add(listForUpdate.get(12));
-        assemblyColorSpinnerItems.add("Local");
-        assemblyColorSpinnerItems.add("Imported");
-        adapter = new ArrayAdapter<String>(getApplicationContext(),
-                R.layout.spinner_layout, assemblyColorSpinnerItems);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        selectAssembly.setAdapter(adapter);
-        selectAssembly.setSelection(2);
-
         engineCapacitySpinnerItems.add("Select Engine Capacity (CC) *");
         engineCapacitySpinnerItems.add(".....");
-        engineCapacitySpinnerItems.add(listForUpdate.get(13));
+        engineCapacitySpinnerItems.add(listForUpdate.get(7));
         engineCapacitySpinnerItems.add("660");
         engineCapacitySpinnerItems.add("800");
         engineCapacitySpinnerItems.add("850");
@@ -1013,7 +871,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 
             case R.id.home_nav:
                 //
-                Intent intent = new Intent(UpdateAd.this, MainActivity.class);
+                Intent intent = new Intent(updateBuyerAd.this, MainActivity.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 return true;
@@ -1024,21 +882,21 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 
             case R.id.chatbot_nav:
                 //
-                Intent intent1 = new Intent(UpdateAd.this, chatbot.class);
+                Intent intent1 = new Intent(updateBuyerAd.this, chatbot.class);
                 startActivity(intent1);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 return true;
 
             case R.id.ar_vr_nav:
                 //
-                Intent intent2 = new Intent(UpdateAd.this, ARHome.class);
+                Intent intent2 = new Intent(updateBuyerAd.this, ARHome.class);
                 startActivity(intent2);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 return true;
 
             case R.id.account_nav:
                 //
-                Intent intent3 = new Intent(UpdateAd.this, account.class);
+                Intent intent3 = new Intent(updateBuyerAd.this, account.class);
                 startActivity(intent3);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 return true;
@@ -1068,7 +926,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 
     private void sendData(){
         if(title.getText().toString().contentEquals("") || title.getText().toString().length() < 4){
-            Toast.makeText(UpdateAd.this, "Enter a valid title",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Enter a valid title",Toast.LENGTH_SHORT).show();
             title.requestFocus();
             InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
             imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
@@ -1076,7 +934,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         }
 
         if(city.getSelectedItemPosition() == 0 || city.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select your city",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Select your city",Toast.LENGTH_SHORT).show();
             city.setFocusable(true);
             city.setFocusableInTouchMode(true);
             city.requestFocus();
@@ -1085,12 +943,12 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         }
 
         if(selectMake.getSelectedItem() == null){
-            Toast.makeText(UpdateAd.this, "Select Make",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Select Make",Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(selectMake.getSelectedItemPosition() == 0 || selectMake.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Make",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Select Make",Toast.LENGTH_SHORT).show();
             selectMake.setFocusable(true);
             selectMake.setFocusableInTouchMode(true);
             selectMake.requestFocus();
@@ -1099,7 +957,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         }
 
         if(selectModel.getSelectedItemPosition() == 0 || selectModel.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Model",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Select Model",Toast.LENGTH_SHORT).show();
             selectModel.setFocusable(true);
             selectModel.setFocusableInTouchMode(true);
             selectModel.requestFocus();
@@ -1107,17 +965,8 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
             return;
         }
 
-        if(selectRegCity.getSelectedItemPosition() == 0 || selectRegCity.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Registration City",Toast.LENGTH_SHORT).show();
-            selectRegCity.setFocusable(true);
-            selectRegCity.setFocusableInTouchMode(true);
-            selectRegCity.requestFocus();
-            selectRegCity.performClick();
-            return;
-        }
-
         if(selectYear.getSelectedItemPosition() == 0 || selectYear.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Year",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Select Year",Toast.LENGTH_SHORT).show();
             selectYear.setFocusable(true);
             selectYear.setFocusableInTouchMode(true);
             selectYear.requestFocus();
@@ -1125,8 +974,17 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
             return;
         }
 
+        if(selectPriceRange.getSelectedItemPosition() == 0 || selectPriceRange.getSelectedItemPosition() == 1){
+            Toast.makeText(updateBuyerAd.this, "Select Price Range",Toast.LENGTH_SHORT).show();
+            selectPriceRange.setFocusable(true);
+            selectPriceRange.setFocusableInTouchMode(true);
+            selectPriceRange.requestFocus();
+            selectPriceRange.performClick();
+            return;
+        }
+
         if(KMDriven.getSelectedItemPosition() == 0 || KMDriven.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select KMs Driven",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Select KMs Driven",Toast.LENGTH_SHORT).show();
             KMDriven.setFocusable(true);
             KMDriven.setFocusableInTouchMode(true);
             KMDriven.requestFocus();
@@ -1134,60 +992,8 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
             return;
         }
 
-        if(selectExteriorColor.getSelectedItemPosition() == 0 || selectExteriorColor.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Exterior Color",Toast.LENGTH_SHORT).show();
-            selectExteriorColor.setFocusable(true);
-            selectExteriorColor.setFocusableInTouchMode(true);
-            selectExteriorColor.requestFocus();
-            selectExteriorColor.performClick();
-            return;
-        }
-
-        if(price.getText().toString().contentEquals("")){
-            Toast.makeText(UpdateAd.this, "Enter a valid price",Toast.LENGTH_SHORT).show();
-            price.requestFocus();
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-            return;
-        }
-
-        if(description.getText().toString().contentEquals("") || description.getText().toString().length() < 4){
-            Toast.makeText(UpdateAd.this, "Add a valid Description",Toast.LENGTH_SHORT).show();
-            description.requestFocus();
-            InputMethodManager imm = (InputMethodManager) getSystemService(Context.INPUT_METHOD_SERVICE);
-            imm.toggleSoftInput(InputMethodManager.SHOW_FORCED, InputMethodManager.HIDE_IMPLICIT_ONLY);
-            return;
-        }
-
-        if(selectEngineType.getSelectedItemPosition() == 0 || selectEngineType.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Engine Type",Toast.LENGTH_SHORT).show();
-            selectEngineType.setFocusable(true);
-            selectEngineType.setFocusableInTouchMode(true);
-            selectEngineType.requestFocus();
-            selectEngineType.performClick();
-            return;
-        }
-
-        if(selectTransmission.getSelectedItemPosition() == 0 || selectTransmission.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Transmission",Toast.LENGTH_SHORT).show();
-            selectTransmission.setFocusable(true);
-            selectTransmission.setFocusableInTouchMode(true);
-            selectTransmission.requestFocus();
-            selectTransmission.performClick();
-            return;
-        }
-
-        if(selectAssembly.getSelectedItemPosition() == 0 || selectAssembly.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Assembly",Toast.LENGTH_SHORT).show();
-            selectAssembly.setFocusable(true);
-            selectAssembly.setFocusableInTouchMode(true);
-            selectAssembly.requestFocus();
-            selectAssembly.performClick();
-            return;
-        }
-
         if(engineCapacity.getSelectedItemPosition() == 0 || engineCapacity.getSelectedItemPosition() == 1){
-            Toast.makeText(UpdateAd.this, "Select Engine Capacity",Toast.LENGTH_SHORT).show();
+            Toast.makeText(updateBuyerAd.this, "Select Engine Capacity",Toast.LENGTH_SHORT).show();
             engineCapacity.setFocusable(true);
             engineCapacity.setFocusableInTouchMode(true);
             engineCapacity.requestFocus();
@@ -1195,56 +1001,32 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
             return;
         }
 
-        mDialog.setMessage("Please wait...");
-        mDialog.show();
-
-        if(imagesEncodedList == null && imagesForUpdate.size() < 3){
-            Toast.makeText(UpdateAd.this, "Please add atleast 3 Photos of your car.",Toast.LENGTH_SHORT).show();
-            mDialog.dismiss();
+        if(imagesEncodedList == null && imagesForUpdate.size() < 1){
+            Toast.makeText(updateBuyerAd.this, "Please add a Photo.",Toast.LENGTH_SHORT).show();
             return;
         }
 
         if(imagesEncodedList != null){
-            if(imagesEncodedList.size() < 3 && imagesForUpdate.size() < 3){
-                Toast.makeText(UpdateAd.this, "Please add atleast 3 Photos of your car.",Toast.LENGTH_SHORT).show();
+            if(imagesEncodedList.size() < 1 && imagesForUpdate.size() < 1){
+                Toast.makeText(updateBuyerAd.this, "Please add a Photo.",Toast.LENGTH_SHORT).show();
                 mDialog.dismiss();
                 return;
             }
         }
 
-        MultipartBody.Part photo1 = null;
-        MultipartBody.Part photo2 = null;
-        MultipartBody.Part photo3 = null;
+        mDialog.setMessage("Please wait...");
+        mDialog.show();
 
-        RequestBody photos =
-                RequestBody.create(MediaType.parse("multipart/form-data"), "0");
+        MultipartBody.Part photo1 = null;
 
         if(imagesEncodedList != null){
-            photos =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), "3");
-
             File imageFile1 = new File(getImageFilePath(imagesEncodedList.get(0)));
 
             RequestBody requestFile1 =
                     RequestBody.create(MediaType.parse("multipart/form-data"), imageFile1);
             photo1 =
                     MultipartBody.Part.createFormData("photo-0", imageFile1.getName(), requestFile1);
-
-            File imageFile2 = new File(getImageFilePath(imagesEncodedList.get(1)));
-
-            RequestBody requestFile2 =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), imageFile2);
-            photo2 =
-                    MultipartBody.Part.createFormData("photo-1", imageFile2.getName(), requestFile2);
-
-            File imageFile3 = new File(getImageFilePath(imagesEncodedList.get(2)));
-
-            RequestBody requestFile3 =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), imageFile3);
-            photo3 =
-                    MultipartBody.Part.createFormData("photo-2", imageFile3.getName(), requestFile3);
         }
-
 
         RequestBody title1 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), title.getText().toString());
@@ -1258,75 +1040,40 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         RequestBody model =
                 RequestBody.create(MediaType.parse("multipart/form-data"), selectModel.getSelectedItem().toString());
 
-        RequestBody RegCity =
-                RequestBody.create(MediaType.parse("multipart/form-data"), selectRegCity.getSelectedItem().toString());
-
         RequestBody year =
                 RequestBody.create(MediaType.parse("multipart/form-data"), selectYear.getSelectedItem().toString());
+
+        RequestBody priceRange =
+                RequestBody.create(MediaType.parse("multipart/form-data"), selectPriceRange.getSelectedItem().toString());
 
         RequestBody kmDriven1 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), KMDriven.getSelectedItem().toString());
 
-        RequestBody extColor =
-                RequestBody.create(MediaType.parse("multipart/form-data"), selectExteriorColor.getSelectedItem().toString());
-
-        RequestBody price1 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), price.getText().toString());
-
-        RequestBody description1 =
-                RequestBody.create(MediaType.parse("multipart/form-data"), description.getText().toString());
-
-        RequestBody engineType =
-                RequestBody.create(MediaType.parse("multipart/form-data"), selectEngineType.getSelectedItem().toString());
-
-        RequestBody transmission =
-                RequestBody.create(MediaType.parse("multipart/form-data"), selectTransmission.getSelectedItem().toString());
-
-        RequestBody assembly =
-                RequestBody.create(MediaType.parse("multipart/form-data"), selectAssembly.getSelectedItem().toString());
+//        RequestBody price1 =
+//                RequestBody.create(MediaType.parse("multipart/form-data"), " ");
 
         RequestBody engineCapacity1 =
                 RequestBody.create(MediaType.parse("multipart/form-data"), engineCapacity.getSelectedItem().toString());
 
-        RequestBody videos =
-                RequestBody.create(MediaType.parse("multipart/form-data"), "0");
+        RequestBody photos =
+                RequestBody.create(MediaType.parse("multipart/form-data"), "1");
 
         RequestBody condition =
                 RequestBody.create(MediaType.parse("multipart/form-data"), "Used");
 
-        MultipartBody.Part video1 = null;
-        if(VideoPath!=null){
-            File videoFile1 = new File(VideoPath);
-
-            RequestBody requestFileV1 =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), videoFile1);
-            video1=
-                    MultipartBody.Part.createFormData("video-0", videoFile1.getName(), requestFileV1);
-
-            videos =
-                    RequestBody.create(MediaType.parse("multipart/form-data"), "1");
-        }
-
         String token = "Bearer "+common.currentUser.getToken();
-        compositeDisposable.add(iMyService.updatePost(token,postID,photo1,photo2,photo3,
+        String id = common.currentUser.getId().replaceAll(" ","");
+        compositeDisposable.add(iMyService.updateBuyersPost(token,postID,photo1,
                 title1,
                 city1,
                 make,
                 model,
-                RegCity,
                 year,
                 kmDriven1,
-                extColor,
-                price1,
-                description1,
-                engineType,
-                transmission,
-                assembly,
+                priceRange,
                 engineCapacity1,
                 photos,
-                videos,
-                condition,
-                video1)
+                condition)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
@@ -1336,17 +1083,17 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
                         if(s.toString().contains("error")){
                             response = s.toString().replace("{error=","");
                             response=response.replace("}","");
-                            Toast.makeText(UpdateAd.this,""+response, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateBuyerAd.this,""+response, Toast.LENGTH_SHORT).show();
                         }
                         else if(s.toString().contains("message")){
                             response = s.toString().replace("{message=","");
                             response=response.replace("}","");
-                            Toast.makeText(UpdateAd.this,""+response, Toast.LENGTH_SHORT).show();
+                            Toast.makeText(updateBuyerAd.this,""+response, Toast.LENGTH_SHORT).show();
                         }
                         else {
                             mDialog.dismiss();
-                            Toast.makeText(UpdateAd.this, "Ad Updated.", Toast.LENGTH_SHORT).show();
-                            Intent intent1 = new Intent(UpdateAd.this, MainActivity.class);
+                            Toast.makeText(updateBuyerAd.this, "Ad Posted.", Toast.LENGTH_SHORT).show();
+                            Intent intent1 = new Intent(updateBuyerAd.this, MainActivity.class);
                             startActivity(intent1);
                             overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                             finish();
@@ -1355,7 +1102,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(UpdateAd.this, "Server Error: "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(updateBuyerAd.this, "Server Error: "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }));
 
@@ -1377,6 +1124,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 
                     Uri mImageUri=data.getData();
                     imageEncoded = mImageUri;
+                    imagesEncodedList.add(mImageUri);
 
                     InputStream imageStream = getContentResolver().openInputStream(mImageUri);
                     Bitmap selectedImage = BitmapFactory.decodeStream(imageStream);
@@ -1403,6 +1151,7 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 
                         imagesEncodedList.add(uri);
 
+
 //                            mArrayUri.add(uri);
 //                            // Get the cursor
 //                            Cursor cursor = getContentResolver().query(uri, filePathColumn, null, null, null);
@@ -1410,45 +1159,16 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
 //                            cursor.moveToFirst();
 //
 //                            int columnIndex = cursor.getColumnIndex(filePathColumn[0]);
-//                            String imageEncoded1  = cursor.getString(columnIndex);
-//                            imagesEncodedList.add(imageEncoded1);
+//                            imageEncoded  = cursor.getString(columnIndex);
+//                            imagesEncodedList.add(imageEncoded);
 //                            cursor.close();
 
                     }
                     uploadPhotos.setImageURI(imagesEncodedList.get(0));
                     Log.v("LOG_TAG", "Selected Images" + mArrayUri.size());
                 }
-            }
-            //for video
-            else if (resultCode == RESULT_OK) {
-                if (requestCode == REQUEST_TAKE_GALLERY_VIDEO) {
-                    Uri selectedImageUri = data.getData();
-
-                    if (selectedImageUri.toString().contains("external")){
-                        //MEDIA GALLERY
-                        String selectedImagePath = ""+getPathVideo(selectedImageUri);
-                        video_title_Label.setText(selectedImagePath);
-                        VideoPath = selectedImagePath;
-                    }
-                    else{
-                        //OI FILE Manager
-                        String filemanagerstring = ""+getVideoFilePath(selectedImageUri);
-                        video_title_Label.setText(filemanagerstring);
-                        VideoPath = filemanagerstring;
-                    }
-
-//                        if (selectedImagePath != null) {
-//
-//                            Intent intent = new Intent(HomeActivity.this,
-//                                    VideoplayAvtivity.class);
-//                            intent.putExtra("path", selectedImagePath);
-//                            startActivity(intent);
-//                        }
-                }
-            }
-
-            else {
-                Toast.makeText(this, "You haven't picked media",
+            } else {
+                Toast.makeText(this, "You haven't picked Image",
                         Toast.LENGTH_LONG).show();
             }
         } catch (Exception e) {
@@ -1463,79 +1183,16 @@ public class UpdateAd extends AppCompatActivity implements BottomNavigationView.
         super.onActivityResult(requestCode, resultCode, data);
     }
 
-//    private String getRealPathFromURI(Uri contentURI) {
-//        String result;
-//        Cursor cursor = getContentResolver().query(contentURI, null, null, null, null);
-//        if (cursor == null) { // Source is Dropbox or other similar local file path
-//            result = contentURI.getPath();
-//        } else {
-//            cursor.moveToFirst();
-//            int idx = cursor.getColumnIndex(MediaStore.Images.ImageColumns.DATA);
-//            result = cursor.getString(idx);
-//            cursor.close();
-//        }
-//        return result;
-//    }
-
     public String getImageFilePath(Uri uri) {
 
         File file = new File(uri.getPath());
         String[] filePath = file.getPath().split(":");
         String image_id = filePath[filePath.length - 1];
 
-        Cursor cursor = getContentResolver().query(MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Images.Media._ID + " = ? ", new String[]{image_id}, null);
+        Cursor cursor = getContentResolver().query(android.provider.MediaStore.Images.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Images.Media._ID + " = ? ", new String[]{image_id}, null);
         if (cursor != null) {
             cursor.moveToFirst();
             String imagePath = cursor.getString(cursor.getColumnIndex(MediaStore.Images.Media.DATA));
-
-            cursor.close();
-            return imagePath;
-        }
-        return null;
-    }
-
-    public boolean checkPermissionForReadExtertalStorage() {
-        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-            int result = this.checkSelfPermission(Manifest.permission.READ_EXTERNAL_STORAGE);
-            return result == PackageManager.PERMISSION_GRANTED;
-        }
-        return false;
-    }
-
-    public void requestPermissionForReadExtertalStorage() throws Exception {
-        try {
-            ActivityCompat.requestPermissions(this, new String[]{Manifest.permission.READ_EXTERNAL_STORAGE},
-                    READ_STORAGE_PERMISSION_REQUEST_CODE);
-        } catch (Exception e) {
-            e.printStackTrace();
-            throw e;
-        }
-    }
-
-    public String getPathVideo(Uri uri) {
-        String[] projection = { MediaStore.Video.Media.DATA };
-        Cursor cursor = getContentResolver().query(uri, projection, null, null, null);
-        if (cursor != null) {
-            // HERE YOU WILL GET A NULLPOINTER IF CURSOR IS NULL
-            // THIS CAN BE, IF YOU USED OI FILE MANAGER FOR PICKING THE MEDIA
-            int column_index = cursor
-                    .getColumnIndexOrThrow(MediaStore.Video.Media.DATA);
-            cursor.moveToFirst();
-            return cursor.getString(column_index);
-        } else
-            return null;
-    }
-
-    public String getVideoFilePath(Uri uri) {
-
-        File file = new File(uri.getPath());
-        String[] filePath = file.getPath().split(":");
-        String image_id = filePath[filePath.length - 1];
-
-        Cursor cursor = getContentResolver().query(MediaStore.Video.Media.EXTERNAL_CONTENT_URI, null, MediaStore.Video.Media._ID + " = ? ", new String[]{image_id}, null);
-        if (cursor != null) {
-            cursor.moveToFirst();
-            String imagePath = cursor.getString(cursor.getColumnIndex(MediaStore.Video.Media.DATA));
 
             cursor.close();
             return imagePath;

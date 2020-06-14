@@ -171,9 +171,7 @@ public class account extends AppCompatActivity implements BottomNavigationView.O
 
             Glide.with(this)
                     .asBitmap()
-                    .load(
-                            common.ip +
-                                    "/user/photo/" + common.currentUser.getId().replaceAll(" ", "")+"?"+new Date().getTime())
+                    .load(common.currentUser.getPhoto())
                     .into(user_image);
 
             Retrofit retrofit = RetrofitClient.getInstance();

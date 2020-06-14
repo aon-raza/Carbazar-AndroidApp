@@ -181,6 +181,9 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
                                         common.currentUser.setEmail(jsonObject.getString("email"));
                                         common.currentUser.setPhone(jsonObject.getString("phone"));
                                         common.currentUser.setRole(jsonObject.getString("role"));
+                                        if (jsonObject.has("photo")){
+                                            common.currentUser.setPhoto(jsonObject.getString("photo"));
+                                        }
 
                                         mDialog1.dismiss();
                                     }
@@ -901,11 +904,19 @@ public class MainActivity extends AppCompatActivity implements BottomNavigationV
     }
 
     @Override
-    public void onpostClick(String postID) {
-        Intent intent = new Intent(MainActivity.this, detailedPostCarBazar.class);
-        intent.putExtra("postID", postID);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    public void onpostClick(String postID, String postType) {
+        if (postType.contentEquals("Seller")){
+            Intent intent = new Intent(MainActivity.this, detailedPostCarBazar.class);
+            intent.putExtra("postID", postID);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
+        else if (postType.contentEquals("Buyer")){
+            Intent intent2 = new Intent(MainActivity.this, detailedBuyerPost.class);
+            intent2.putExtra("postID", postID);
+            startActivity(intent2);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
     }
 
     private void initRecyclerViewOLX(){

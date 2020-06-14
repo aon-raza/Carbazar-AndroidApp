@@ -87,7 +87,14 @@ public class recyclerViewAdapterCarBazar extends RecyclerView.Adapter<recyclerVi
             public void onClick(View v) {
                 if(post.has("engine_type")){
                     try {
-                        onOptionClickListener.onpostClick(post.getString("_id"));
+                        onOptionClickListener.onpostClick(post.getString("_id"), "Seller");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if(!post.has("engine_type")){
+                    try {
+                        onOptionClickListener.onpostClick(post.getString("_id"), "Buyer");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }
@@ -100,7 +107,14 @@ public class recyclerViewAdapterCarBazar extends RecyclerView.Adapter<recyclerVi
             public void onClick(View v) {
                 if(post.has("engine_type")){
                     try {
-                        onOptionClickListener.onpostClick(post.getString("_id"));
+                        onOptionClickListener.onpostClick(post.getString("_id"), "Seller");
+                    } catch (JSONException e) {
+                        e.printStackTrace();
+                    }
+                }
+                else if(!post.has("engine_type")){
+                    try {
+                        onOptionClickListener.onpostClick(post.getString("_id"), "Buyer");
                     } catch (JSONException e) {
                         e.printStackTrace();
                     }

@@ -86,6 +86,9 @@ public interface IMyService {
     @GET("post/{postId}")
     Observable<Object> getSinglePost(@Path("postId") String postId);
 
+    @GET("b_post/{postId}")
+    Observable<Object> getSingleBuyerPost(@Path("postId") String postId);
+
     @GET("posts")
     Observable<Object> carBazarPosts();
 
@@ -98,6 +101,16 @@ public interface IMyService {
     Observable<Object> unsavePost(@Header("Authorization") String authKey,
                                 @Path("accountId") String accountId,
                                 @Body saveUnsave body);
+
+    @PUT("saveBuyerPost/{accountId}")
+    Observable<Object> savePostBuyer(@Header("Authorization") String authKey,
+                                @Path("accountId") String accountId,
+                                @Body saveUnsave body);
+
+    @PUT("unsaveBuyerPost/{accountId}")
+    Observable<Object> unsavePostBuyer(@Header("Authorization") String authKey,
+                                  @Path("accountId") String accountId,
+                                  @Body saveUnsave body);
 
     @GET("postsSaved/by/{accountId}")
     Observable<Object> getSavedAds(@Header("Authorization") String authKey,
@@ -194,8 +207,28 @@ public interface IMyService {
                                   @Part("photos") RequestBody photos,
                                   @Part("condition") RequestBody condition);
 
+    @Multipart
+    @PUT("b_post/{postId}")
+    Observable<Object> updateBuyersPost(@Header("Authorization") String authKey,
+                                        @Path("postId") String postId,
+                                        @Part MultipartBody.Part photo1,
+                                        @Part("title") RequestBody title,
+                                        @Part("city") RequestBody city,
+                                        @Part("make") RequestBody make,
+                                        @Part("model") RequestBody model,
+                                        @Part("registration_year") RequestBody registration_year,
+                                        @Part("mileage") RequestBody mileage,
+                                        @Part("price") RequestBody price,
+                                        @Part("engine_capacity") RequestBody engine_capacity,
+                                        @Part("photos") RequestBody photos,
+                                        @Part("condition") RequestBody condition);
+
     @DELETE("post/{postId}")
     Observable<Object> deletePost(@Header("Authorization") String authKey,
+                                  @Path("postId") String postId);
+
+    @DELETE("b_post/{postId}")
+    Observable<Object> deleteBuyerPost(@Header("Authorization") String authKey,
                                   @Path("postId") String postId);
 
     @POST("report")
@@ -224,7 +257,7 @@ public interface IMyService {
 
     //to Flask API
 
-    @GET("/")
+    @GET("olxhome")
     Observable<Object> OLXHome();
 
     @GET("search")

@@ -22,7 +22,9 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".reviewAdToPost"></activity>
+        <activity android:name=".updateBuyerAd"></activity>
+        <activity android:name=".detailedBuyerPost" />
+        <activity android:name=".reviewAdToPost" />
         <activity android:name=".UpdateAd" />
         <activity android:name=".viewInVR" />
         <activity android:name=".splash">

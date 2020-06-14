@@ -3,7 +3,6 @@ package com.example.carbazar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.AppCompatEditText;
-import androidx.appcompat.widget.AppCompatImageButton;
 import androidx.appcompat.widget.AppCompatImageView;
 import androidx.appcompat.widget.AppCompatTextView;
 import androidx.viewpager.widget.PagerAdapter;
@@ -51,7 +50,7 @@ import io.reactivex.functions.Consumer;
 import io.reactivex.schedulers.Schedulers;
 import retrofit2.Retrofit;
 
-public class detailedPostCarBazar extends AppCompatActivity {
+public class detailedBuyerPost extends AppCompatActivity {
 
     private String postID;
     CompositeDisposable compositeDisposable = new CompositeDisposable();
@@ -65,18 +64,10 @@ public class detailedPostCarBazar extends AppCompatActivity {
     private AppCompatTextView model;
     private AppCompatTextView year;
     private AppCompatTextView kmDriven;
-    private AppCompatTextView engineType;
-    private AppCompatTextView regesteredIn;
-    private AppCompatTextView trasnmission;
     private AppCompatTextView engineCapacity;
-    private AppCompatTextView assembly;
-    private AppCompatTextView condition;
-
-    private AppCompatTextView description;
 
     private AppCompatTextView user_name;
 
-    private VideoView videoView;
     private List<String> imagesList;
 
     private AppCompatButton contact_seller_btn;
@@ -100,12 +91,11 @@ public class detailedPostCarBazar extends AppCompatActivity {
     private ArrayList<String> listForUpdate;
     private ArrayList<String> imagesForUpdate;
     private ArrayList<String> videoForUpdate;
-
-
+    
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_detailed_post_car_bazar);
+        setContentView(R.layout.activity_detailed_buyer_post);
 
         listForUpdate = new ArrayList<String>();
         imagesForUpdate = new ArrayList<String>();
@@ -123,17 +113,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
         model = findViewById(R.id.model);
         year = findViewById(R.id.year);
         kmDriven = findViewById(R.id.KMDriven);
-        engineType = findViewById(R.id.engine_type);
-        regesteredIn = findViewById(R.id.registered_in);
-        trasnmission = findViewById(R.id.transmission);
         engineCapacity = findViewById(R.id.engine_capacity);
-        assembly = findViewById(R.id.assembly);
-        condition = findViewById(R.id.condition);
-
-        description = findViewById(R.id.description);
-
-        videoView = findViewById(R.id.videoView);
-        videoView.setVisibility(View.GONE);
 
 
         contact_seller_btn = findViewById(R.id.contact_seller_btn);
@@ -153,7 +133,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
         user_image.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(detailedPostCarBazar.this, OtherProfile.class);
+                Intent intent = new Intent(detailedBuyerPost.this, OtherProfile.class);
                 intent.putExtra("posterID", posterID);
                 intent.putExtra("posterName", user_name.getText().toString());
                 intent.putExtra("posterRole", posterRole);
@@ -166,7 +146,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
         user_name.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(detailedPostCarBazar.this, OtherProfile.class);
+                Intent intent = new Intent(detailedBuyerPost.this, OtherProfile.class);
                 intent.putExtra("posterID", posterID);
                 intent.putExtra("posterName", user_name.getText().toString());
                 intent.putExtra("posterRole", posterRole);
@@ -179,7 +159,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
         view_profile_label.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(detailedPostCarBazar.this, OtherProfile.class);
+                Intent intent = new Intent(detailedBuyerPost.this, OtherProfile.class);
                 intent.putExtra("posterID", posterID);
                 intent.putExtra("posterName", user_name.getText().toString());
                 intent.putExtra("posterRole", posterRole);
@@ -223,18 +203,18 @@ public class detailedPostCarBazar extends AppCompatActivity {
                         String token = "Bearer "+ common.currentUser.getToken();
                         String id = common.currentUser.getId().replaceAll(" ","");
                         saveUnsave su = new saveUnsave(id, postID);
-                        compositeDisposable.add(iMyService.unsavePost(token,id,su)
+                        compositeDisposable.add(iMyService.unsavePostBuyer(token,id,su)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Consumer<Object>() {
                                     @Override
                                     public void accept(Object s) throws Exception {
-                                            Toast.makeText(detailedPostCarBazar.this,"Ad removed from Saved", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(detailedBuyerPost.this,"Ad removed from Saved", Toast.LENGTH_SHORT).show();
                                     }
                                 }, new Consumer<Throwable>() {
                                     @Override
                                     public void accept(Throwable throwable) throws Exception {
-                                        Toast.makeText(detailedPostCarBazar.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(detailedBuyerPost.this, "Server Error!", Toast.LENGTH_SHORT).show();
                                     }
                                 }));
                     }
@@ -244,18 +224,18 @@ public class detailedPostCarBazar extends AppCompatActivity {
                         String token = "Bearer "+ common.currentUser.getToken();
                         String id = common.currentUser.getId().replaceAll(" ","");
                         saveUnsave su = new saveUnsave(id, postID);
-                        compositeDisposable.add(iMyService.savePost(token,id,su)
+                        compositeDisposable.add(iMyService.savePostBuyer(token,id,su)
                                 .subscribeOn(Schedulers.io())
                                 .observeOn(AndroidSchedulers.mainThread())
                                 .subscribe(new Consumer<Object>() {
                                     @Override
                                     public void accept(Object s) throws Exception {
-                                        Toast.makeText(detailedPostCarBazar.this,"Ad Saved", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(detailedBuyerPost.this,"Ad Saved", Toast.LENGTH_SHORT).show();
                                     }
                                 }, new Consumer<Throwable>() {
                                     @Override
                                     public void accept(Throwable throwable) throws Exception {
-                                        Toast.makeText(detailedPostCarBazar.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                        Toast.makeText(detailedBuyerPost.this, "Server Error!", Toast.LENGTH_SHORT).show();
                                     }
                                 }));
                     }
@@ -271,13 +251,13 @@ public class detailedPostCarBazar extends AppCompatActivity {
             public void onClick(View v) {
                 if(isOnline()) {
                     if(common.currentUser == null){
-                        Toast.makeText(detailedPostCarBazar.this, "Sign in first", Toast.LENGTH_SHORT).show();
-                        Intent intent3 = new Intent(detailedPostCarBazar.this, signin.class);
+                        Toast.makeText(detailedBuyerPost.this, "Sign in first", Toast.LENGTH_SHORT).show();
+                        Intent intent3 = new Intent(detailedBuyerPost.this, signin.class);
                         startActivity(intent3);
                         overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                     }
                     else{
-                        LayoutInflater inflater = (LayoutInflater) detailedPostCarBazar.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                        LayoutInflater inflater = (LayoutInflater) detailedBuyerPost.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                         final View formElementsView = inflater.inflate(R.layout.contact_seller_alert,null, false);
 
                         final AppCompatTextView titleTextView = formElementsView.findViewById(R.id.title_Label);
@@ -290,17 +270,17 @@ public class detailedPostCarBazar extends AppCompatActivity {
                         nameEditText.setFocusable(false);
                         emailEditText.setText(common.currentUser.getEmail());
                         emailEditText.setFocusable(false);
-                        messageEditText.setText("Hi,I am interested in your car " + title.getText().toString() + " advertised on Carbazar.com." +
-                                " Please let me know if it's still available. \nThanks.");
+                        messageEditText.setText("Hi,I am interested in your car " + title.getText().toString() + " ad on Carbazar.com." +
+                                " Please let me know if you still wanna buy. \nThanks.");
                         messageEditText.setFocusable(false);
 
 
-                        new AlertDialog.Builder(detailedPostCarBazar.this).setView(formElementsView)
-                                .setTitle("Contact Seller")
+                        new AlertDialog.Builder(detailedBuyerPost.this).setView(formElementsView)
+                                .setTitle("Contact Buyer")
                                 .setPositiveButton("Send", new DialogInterface.OnClickListener() {
                                     public void onClick(DialogInterface dialog, int id) {
-                                    sendMessageToSeller(common.currentUser.getName(), common.currentUser.getEmail(),
-                                        titleTextView.getText().toString(), messageEditText.getText().toString(), posterEmail);
+                                        sendMessageToSeller(common.currentUser.getName(), common.currentUser.getEmail(),
+                                                titleTextView.getText().toString(), messageEditText.getText().toString(), posterEmail);
                                     }
 
                                 })
@@ -333,7 +313,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
                 if(position == 2){
-                    LayoutInflater inflater = (LayoutInflater) detailedPostCarBazar.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
+                    LayoutInflater inflater = (LayoutInflater) detailedBuyerPost.this.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
                     final View formElementsView = inflater.inflate(R.layout.contact_seller_alert,null, false);
 
                     final AppCompatTextView titleTextView = formElementsView.findViewById(R.id.title_Label);
@@ -346,28 +326,28 @@ public class detailedPostCarBazar extends AppCompatActivity {
                     emailEditText.setVisibility(View.GONE);
                     messageEditText.setVisibility(View.GONE);
 
-                    new AlertDialog.Builder(detailedPostCarBazar.this).setView(formElementsView)
+                    new AlertDialog.Builder(detailedBuyerPost.this).setView(formElementsView)
                             .setTitle("Delete post")
                             .setPositiveButton("Yes", new DialogInterface.OnClickListener() {
                                 public void onClick(DialogInterface dialog, int id) {
                                     String token = "Bearer "+common.currentUser.getToken();
-                                    compositeDisposable.add(iMyService.deletePost(token,postID)
+                                    compositeDisposable.add(iMyService.deleteBuyerPost(token,postID)
                                             .subscribeOn(Schedulers.io())
                                             .observeOn(AndroidSchedulers.mainThread())
                                             .subscribe(new Consumer<Object>() {
                                                 @Override
                                                 public void accept(Object response) throws Exception {
                                                     //my own
-                                                    Toast.makeText(detailedPostCarBazar.this, "Post Deleted!", Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(detailedBuyerPost.this, "Post Deleted!", Toast.LENGTH_SHORT).show();
                                                     finish();
-                                                    Intent intent = new Intent(detailedPostCarBazar.this, MainActivity.class);
+                                                    Intent intent = new Intent(detailedBuyerPost.this, MainActivity.class);
                                                     startActivity(intent);
                                                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                                                 }
                                             }, new Consumer<Throwable>() {
                                                 @Override
                                                 public void accept(Throwable throwable) throws Exception {
-                                                    Toast.makeText(detailedPostCarBazar.this, "Error! \n"+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                                    Toast.makeText(detailedBuyerPost.this, "Error! \n"+throwable.getMessage(), Toast.LENGTH_SHORT).show();
                                                 }
                                             }));
                                 }
@@ -376,13 +356,13 @@ public class detailedPostCarBazar extends AppCompatActivity {
                             .setNegativeButton("Cancel", null).show();
                 }
                 else if(position == 1){
-                    Intent intent = new Intent(detailedPostCarBazar.this, UpdateAd.class);
+                    Intent intent = new Intent(detailedBuyerPost.this, updateBuyerAd.class);
                     intent.putStringArrayListExtra("listForUpdate", listForUpdate);
                     intent.putExtra("imagesForUpdate", imagesForUpdate);
-                    intent.putExtra("videoForUpdate", videoForUpdate);
                     intent.putExtra("postID", postID);
 
                     startActivity(intent);
+
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
             }
@@ -401,7 +381,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
     }
 
     private void getPost(String postID){
-        compositeDisposable.add(iMyService.getSinglePost(postID)
+        compositeDisposable.add(iMyService.getSingleBuyerPost(postID)
                 .subscribeOn(Schedulers.io())
                 .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(new Consumer<Object>() {
@@ -414,7 +394,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(detailedPostCarBazar.this, "Error! \n"+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(detailedBuyerPost.this, "Error! \n"+throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }));
     }
@@ -427,29 +407,23 @@ public class detailedPostCarBazar extends AppCompatActivity {
             while (i<jsonArray.length()){
                 imagesList.add(
 //                        common.ip +
-                                jsonArray.getString(i).replaceAll("\\\\", "/"));
+                        jsonArray.getString(i).replaceAll("\\\\", "/"));
                 imagesForUpdate.add(
 //                        common.ip +
-                                jsonArray.getString(i).replaceAll("\\\\", "/"));
+                        jsonArray.getString(i).replaceAll("\\\\", "/"));
                 i++;
             }
             ViewPager viewPager = findViewById(R.id.view_pager);
-            ImagePagerAdapter adapter = new ImagePagerAdapter(this, imagesList);
+            detailedBuyerPost.ImagePagerAdapter adapter = new detailedBuyerPost.ImagePagerAdapter(this, imagesList);
             viewPager.setAdapter(adapter);
 
             listForUpdate.add(jsonObject.getString("title"));
             listForUpdate.add(jsonObject.getString("city"));
             listForUpdate.add(jsonObject.getString("make"));
             listForUpdate.add(jsonObject.getString("model"));
-            listForUpdate.add(jsonObject.getString("registration_city"));
             listForUpdate.add(jsonObject.getString("registration_year"));
-            listForUpdate.add(jsonObject.getString("mileage"));
-            listForUpdate.add(jsonObject.getString("exterior_color"));
             listForUpdate.add(jsonObject.getString("price"));
-            listForUpdate.add(jsonObject.getString("body"));
-            listForUpdate.add(jsonObject.getString("engine_type"));
-            listForUpdate.add(jsonObject.getString("transmission"));
-            listForUpdate.add(jsonObject.getString("assembly"));
+            listForUpdate.add(jsonObject.getString("mileage"));
             listForUpdate.add(jsonObject.getString("engine_capacity"));
 
             price.setText("Rs " + jsonObject.getString("price"));
@@ -461,14 +435,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
             model.setText(jsonObject.getString("model"));
             year.setText(jsonObject.getString("registration_year"));
             kmDriven.setText(jsonObject.getString("mileage") + " kms");
-            engineType.setText(jsonObject.getString("engine_type"));
-            regesteredIn.setText(jsonObject.getString("registration_city"));
-            trasnmission.setText(jsonObject.getString("transmission"));
             engineCapacity.setText(jsonObject.getString("engine_capacity") +" (cc)");
-            assembly.setText(jsonObject.getString("assembly"));
-            condition.setText(jsonObject.getString("condition"));
-
-            description.setText(jsonObject.getString("body"));
 
             user_name.setText(jsonObject.getJSONObject("postedBy").getString("name"));
 
@@ -521,25 +488,9 @@ public class detailedPostCarBazar extends AppCompatActivity {
                     contact_seller_btn.setVisibility(View.GONE);
                 }
             }
-            if(jsonObject.getJSONArray("video").length()>0){
-                videoForUpdate.add(jsonObject.getJSONArray("video").getString(0));
-                videoView.setVisibility(View.VISIBLE);
-                Uri uri = Uri.parse(
-//                        common.ip +
-                                jsonObject.getJSONArray("video").getString(0)
-                        .replaceAll("\\\\", "/"));
-                videoView.setVideoURI(uri);
-                MediaController mediaController = new MediaController(this);
-//                mediaController.show(500);
-                mediaController.setAnchorView(videoView);
-                videoView.setMediaController(mediaController);
-                videoView.start();
-            }
-
-
 
         } catch (JSONException e) {
-            Toast.makeText(detailedPostCarBazar.this, "Error! \n"+e.getMessage(), Toast.LENGTH_SHORT).show();
+            Toast.makeText(detailedBuyerPost.this, "Error! \n"+e.getMessage(), Toast.LENGTH_SHORT).show();
         }
     }
     public boolean isOnline() {
@@ -566,12 +517,12 @@ public class detailedPostCarBazar extends AppCompatActivity {
                     @Override
                     public void accept(Object response) throws Exception {
                         //my own
-                        Toast.makeText(detailedPostCarBazar.this, "The message has been sent to the seller.", Toast.LENGTH_LONG).show();
+                        Toast.makeText(detailedBuyerPost.this, "The message has been sent to the Buyer.", Toast.LENGTH_LONG).show();
                     }
                 }, new Consumer<Throwable>() {
                     @Override
                     public void accept(Throwable throwable) throws Exception {
-                        Toast.makeText(detailedPostCarBazar.this, "Error! \n"+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        Toast.makeText(detailedBuyerPost.this, "Error! \n"+throwable.getMessage(), Toast.LENGTH_SHORT).show();
                     }
                 }));
     }
@@ -598,7 +549,7 @@ public class detailedPostCarBazar extends AppCompatActivity {
 
         @Override
         public Object instantiateItem(ViewGroup container, int position) {
-            Context context = detailedPostCarBazar.this;
+            Context context = detailedBuyerPost.this;
             ImageView imageView = new ImageView(context);
             imageView.setScaleType(ImageView.ScaleType.CENTER_CROP);
             Glide.with(mContext)

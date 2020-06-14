@@ -232,11 +232,19 @@ public class myAds extends AppCompatActivity implements BottomNavigationView.OnN
     }
 
     @Override
-    public void onpostClick(String postID) {
-        Intent intent = new Intent(myAds.this, detailedPostCarBazar.class);
-        intent.putExtra("postID", postID);
-        startActivity(intent);
-        overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+    public void onpostClick(String postID, String postType) {
+        if (postType.contentEquals("Seller")){
+            Intent intent = new Intent(myAds.this, detailedPostCarBazar.class);
+            intent.putExtra("postID", postID);
+            startActivity(intent);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
+        else if (postType.contentEquals("Buyer")){
+            Intent intent2 = new Intent(myAds.this, detailedBuyerPost.class);
+            intent2.putExtra("postID", postID);
+            startActivity(intent2);
+            overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+        }
     }
 
     private void initRecyclerView(){
