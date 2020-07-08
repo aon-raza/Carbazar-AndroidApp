@@ -22,7 +22,11 @@
         android:supportsRtl="true"
         android:theme="@style/AppTheme"
         android:usesCleartextTraffic="true">
-        <activity android:name=".updateBuyerAd"></activity>
+        <activity android:name=".searchCarReviews"></activity>
+        <activity android:name=".writeReview" />
+        <activity android:name=".recommender" />
+        <activity android:name=".dealersSignup" />
+        <activity android:name=".updateBuyerAd" />
         <activity android:name=".detailedBuyerPost" />
         <activity android:name=".reviewAdToPost" />
         <activity android:name=".UpdateAd" />

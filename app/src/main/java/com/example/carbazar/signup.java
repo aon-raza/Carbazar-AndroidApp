@@ -42,6 +42,7 @@ public class signup extends AppCompatActivity {
     private RelativeLayout RLSignup;
     private Toolbar toolbar;
     private AppCompatTextView alreadyHaveAcc;
+    private AppCompatTextView sign_up_as_dealer_btn;
 
     CompositeDisposable compositeDisposable = new CompositeDisposable();
     IMyService iMyService;
@@ -61,6 +62,7 @@ public class signup extends AppCompatActivity {
         RLSignup = findViewById(R.id.RL_signup);
         toolbar = findViewById(R.id.toolbar);
         alreadyHaveAcc = findViewById(R.id.already_have_acc);
+        sign_up_as_dealer_btn = findViewById(R.id.sign_up_as_dealer_btn);
 
         setSupportActionBar(toolbar);
         getSupportActionBar().setDisplayHomeAsUpEnabled(true);
@@ -124,6 +126,15 @@ public class signup extends AppCompatActivity {
                     Toast.makeText(getApplicationContext(),"No Internet Connection",Toast.LENGTH_SHORT).show();
                 }
 
+            }
+        });
+
+        sign_up_as_dealer_btn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(com.example.carbazar.signup.this, dealersSignup.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
         });
     }

@@ -30,17 +30,16 @@
             android:text="@string/sign_up"
             android:textColor="@color/colorAccent"
             android:textSize="16pt"
-            android:layout_marginHorizontal="16pt"
-            android:layout_marginBottom="4pt"/>
+            android:layout_marginHorizontal="12pt"
+            android:layout_marginBottom="6pt"/>
 
         <com.google.android.material.textfield.TextInputLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
             android:id="@+id/first_name_Layout"
             android:layout_below="@+id/sign_up_Label"
-            android:layout_marginHorizontal="16pt"
-            android:layout_marginTop="8pt"
-            android:layout_marginBottom="4pt">
+            android:layout_marginHorizontal="12pt"
+            android:layout_marginBottom="3pt">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
@@ -57,9 +56,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/last_name_Layout"
             android:layout_below="@+id/first_name_Layout"
-            android:layout_marginHorizontal="16pt"
-            android:layout_marginTop="4pt"
-            android:layout_marginBottom="4pt">
+            android:layout_marginHorizontal="12pt"
+            android:layout_marginTop="3pt"
+            android:layout_marginBottom="3pt">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
@@ -76,9 +75,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/email_Layout"
             android:layout_below="@+id/last_name_Layout"
-            android:layout_marginHorizontal="16pt"
-            android:layout_marginTop="4pt"
-            android:layout_marginBottom="4pt">
+            android:layout_marginHorizontal="12pt"
+            android:layout_marginTop="3pt"
+            android:layout_marginBottom="3pt">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
@@ -95,9 +94,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/phone_Layout"
             android:layout_below="@+id/email_Layout"
-            android:layout_marginHorizontal="16pt"
-            android:layout_marginTop="4pt"
-            android:layout_marginBottom="4pt">
+            android:layout_marginHorizontal="12pt"
+            android:layout_marginTop="3pt"
+            android:layout_marginBottom="3pt">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
@@ -112,9 +111,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/password_Layout"
             android:layout_below="@+id/phone_Layout"
-            android:layout_marginHorizontal="16pt"
-            android:layout_marginTop="4pt"
-            android:layout_marginBottom="4pt">
+            android:layout_marginHorizontal="12pt"
+            android:layout_marginTop="3pt"
+            android:layout_marginBottom="3pt">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
@@ -130,9 +129,9 @@
             android:layout_height="wrap_content"
             android:id="@+id/confirm_password_Layout"
             android:layout_below="@+id/password_Layout"
-            android:layout_marginHorizontal="16pt"
-            android:layout_marginTop="4pt"
-            android:layout_marginBottom="4pt">
+            android:layout_marginHorizontal="12pt"
+            android:layout_marginTop="3pt"
+            android:layout_marginBottom="3pt">
 
             <androidx.appcompat.widget.AppCompatEditText
                 android:layout_width="match_parent"
@@ -162,11 +161,23 @@
         <androidx.appcompat.widget.AppCompatTextView
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:id="@+id/sign_up_as_dealer_btn"
+            android:text="@string/sign_up_as_dealer"
+            android:textColor="@color/colorPrimary"
+            android:gravity="center"
+            android:layout_below="@+id/sign_up_btn"
+            android:textSize="11pt"
+            android:layout_marginHorizontal="40pt"
+            android:layout_marginTop="4pt"/>
+
+        <androidx.appcompat.widget.AppCompatTextView
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
             android:id="@+id/already_have_acc"
             android:text="@string/already_have_an_account"
             android:textColor="@color/colorPrimary"
             android:gravity="center"
-            android:layout_below="@+id/sign_up_btn"
+            android:layout_below="@+id/sign_up_as_dealer_btn"
             android:textSize="8pt"
             android:layout_marginHorizontal="40pt"
             android:layout_marginTop="6pt"/>

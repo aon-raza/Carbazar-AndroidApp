@@ -15,12 +15,21 @@ import androidx.cardview.widget.CardView;
 import androidx.recyclerview.widget.RecyclerView;
 
 import com.bumptech.glide.Glide;
+import com.example.carbazar.IMyService;
+import com.example.carbazar.Models.siteVisitModel;
 import com.example.carbazar.R;
+import com.example.carbazar.RetrofitClient;
 
 import org.json.JSONException;
 import org.json.JSONObject;
 
 import java.util.List;
+
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 public class recyclerViewAdapterPakWheels extends RecyclerView.Adapter<recyclerViewAdapterPakWheels.ViewHolder>  {
 
@@ -28,6 +37,11 @@ public class recyclerViewAdapterPakWheels extends RecyclerView.Adapter<recyclerV
 
     private List<String> list;
     private Context mContext;
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+
+    Retrofit retrofit = RetrofitClient.getInstance();
+    IMyService iMyService = retrofit.create(IMyService.class);
 
     public recyclerViewAdapterPakWheels(Context mContext, List<String> list) {
         this.list = list;
@@ -74,6 +88,23 @@ public class recyclerViewAdapterPakWheels extends RecyclerView.Adapter<recyclerV
                 @Override
                 public void onClick(View v) {
                     try {
+                        siteVisitModel siteVisitModel1 = new siteVisitModel("pkw");
+                        compositeDisposable.add(iMyService.visit(siteVisitModel1)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                        //my own
+//                                                        JSONArray jsonArray = new JSONArray(JSON.serialize(s));
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+//                                        Toast.makeText(writeReview.this, "Server Error!" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+
                         JSONObject jsonObject2 = new JSONObject(post);
                         String link = jsonObject2.getString("link");
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));
@@ -88,6 +119,23 @@ public class recyclerViewAdapterPakWheels extends RecyclerView.Adapter<recyclerV
                 @Override
                 public void onClick(View v) {
                     try {
+                        siteVisitModel siteVisitModel1 = new siteVisitModel("pkw");
+                        compositeDisposable.add(iMyService.visit(siteVisitModel1)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                        //my own
+//                                                        JSONArray jsonArray = new JSONArray(JSON.serialize(s));
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+//                                        Toast.makeText(writeReview.this, "Server Error!" +throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+
                         JSONObject jsonObject2 = new JSONObject(post);
                         String link = jsonObject2.getString("link");
                         Intent browserIntent = new Intent(Intent.ACTION_VIEW, Uri.parse(link));

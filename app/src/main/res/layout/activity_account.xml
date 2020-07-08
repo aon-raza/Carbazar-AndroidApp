@@ -105,9 +105,55 @@
             <androidx.appcompat.widget.AppCompatTextView
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
+                android:text="@string/car_reviews12"
+                android:id="@+id/reviewsBtn"
+                android:layout_below="@id/space2"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/review_icon"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space3"
+                android:layout_below="@+id/reviewsBtn"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/car_recommendations"
+                android:id="@+id/recommendationBtn"
+                android:layout_below="@id/space3"
+                android:textSize="12pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:textStyle="bold"
+                android:drawableStart="@drawable/recommender_icon"
+                android:drawableTint="@color/colorBackgroundBottomNavigation"
+                android:drawablePadding="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:layout_marginTop="6pt"/>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="0.5pt"
+                android:background="#f2f2f2"
+                android:id="@+id/space344"
+                android:layout_below="@+id/recommendationBtn"
+                android:layout_marginTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
                 android:text="@string/p1"
                 android:id="@+id/privacyBtn"
-                android:layout_below="@id/space2"
+                android:layout_below="@id/space344"
                 android:textSize="12pt"
                 android:textColor="@color/colorBackgroundBottomNavigation"
                 android:textStyle="bold"
@@ -121,7 +167,7 @@
                 android:layout_width="match_parent"
                 android:layout_height="0.5pt"
                 android:background="#f2f2f2"
-                android:id="@+id/space3"
+                android:id="@+id/space31"
                 android:layout_below="@+id/privacyBtn"
                 android:layout_marginTop="6pt"/>
 
@@ -130,7 +176,7 @@
                 android:layout_height="wrap_content"
                 android:text="@string/notifications"
                 android:id="@+id/notificationsBtn"
-                android:layout_below="@id/space3"
+                android:layout_below="@id/space31"
                 android:textSize="12pt"
                 android:textColor="@color/colorBackgroundBottomNavigation"
                 android:textStyle="bold"

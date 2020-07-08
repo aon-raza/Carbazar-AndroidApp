@@ -19,6 +19,7 @@ public class RetrofitClientFlask {
                     .build();
 
             instance = new Retrofit.Builder()
+//                    .baseUrl("http://192.168.43.11:5000/")
                     .baseUrl("https://carbazar-scrapper.herokuapp.com/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .addConverterFactory(ScalarsConverterFactory.create())

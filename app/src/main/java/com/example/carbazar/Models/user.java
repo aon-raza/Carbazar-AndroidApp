@@ -12,6 +12,11 @@ public class user {
     private String role;
     private String photo;
 
+    private String address;
+    private String companyname;
+    private String companyphone;
+    private String companycity;
+
     public user() {
     }
 
@@ -29,6 +34,18 @@ public class user {
         this.email = email;
         this.password = password;
         this.phone = phone;
+    }
+
+    public user(String name, String email, String password, String phone, String role, String address, String companyname, String companyphone, String companycity) {
+        this.name = name;
+        this.email = email;
+        this.password = password;
+        this.phone = phone;
+        this.role = role;
+        this.address = address;
+        this.companyname = companyname;
+        this.companyphone = companyphone;
+        this.companycity = companycity;
     }
 
     public String getName() {
@@ -93,5 +110,37 @@ public class user {
 
     public void setPhoto(String photo) {
         this.photo = photo;
+    }
+
+    public String getAddress() {
+        return address;
+    }
+
+    public void setAddress(String address) {
+        this.address = address;
+    }
+
+    public String getCompanyname() {
+        return companyname;
+    }
+
+    public void setCompanyname(String companyname) {
+        this.companyname = companyname;
+    }
+
+    public String getCompanyphone() {
+        return companyphone;
+    }
+
+    public void setCompanyphone(String companyphone) {
+        this.companyphone = companyphone;
+    }
+
+    public String getCompanycity() {
+        return companycity;
+    }
+
+    public void setCompanycity(String companycity) {
+        this.companycity = companycity;
     }
 }

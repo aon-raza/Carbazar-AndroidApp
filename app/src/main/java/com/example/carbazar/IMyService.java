@@ -4,10 +4,14 @@ import com.example.carbazar.Models.common;
 import com.example.carbazar.Models.contactModel;
 import com.example.carbazar.Models.contactSellerModel;
 import com.example.carbazar.Models.followModel;
+import com.example.carbazar.Models.priceRecommender;
 import com.example.carbazar.Models.reportModel;
+import com.example.carbazar.Models.reviewLDmodel;
 import com.example.carbazar.Models.saveUnsave;
+import com.example.carbazar.Models.siteVisitModel;
 import com.example.carbazar.Models.unfollowModel;
 import com.example.carbazar.Models.user;
+import com.example.carbazar.Models.writeReviewModel;
 import com.google.gson.JsonObject;
 import com.mongodb.util.JSON;
 
@@ -72,6 +76,9 @@ public interface IMyService {
 
     @GET("model")
     Observable<Object> getModels(@Query("make") String make);
+
+    @GET("variants")
+    Observable<Object> getVersions(@Query("model") String model);
 
     @GET("sessionId")
     Observable<Object> getSessionId();
@@ -254,6 +261,35 @@ public interface IMyService {
                                         @Query("transmission") String transmission,
                                         @Query("color") String color,
                                         @Query("query") String query);
+
+    @GET("recommendCar")
+    Observable<Object> bestModel();
+
+    @GET("recommendCarBrand")
+    Observable<Object> bestBrand();
+
+    @GET("recommendCarMileage")
+    Observable<Object> bestMileage();
+
+    @POST("recommendCarPrice")
+    Observable<Object> bestPrice(@Body priceRecommender body);
+
+    @GET("searchCar")
+    Observable<Object> searchReviews(@Query("make") String make,
+                                     @Query("model") String model,
+                                     @Query("version") String version);
+
+    @POST("createReview")
+    Observable<Object> createReview(@Body writeReviewModel body);
+
+    @PUT("likecar")
+    Observable<Object> like(@Body reviewLDmodel body);
+
+    @PUT("dislikecar")
+    Observable<Object> dislike (@Body reviewLDmodel body);
+
+    @POST("visit")
+    Observable<Object> visit(@Body siteVisitModel body);
 
     //to Flask API
 

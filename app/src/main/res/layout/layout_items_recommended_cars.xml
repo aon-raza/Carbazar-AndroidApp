@@ -1,0 +1,216 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_marginTop="2pt"
+    android:layout_marginBottom="2pt">
+
+    <androidx.cardview.widget.CardView
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:id="@+id/cardview_home"
+        android:layout_gravity="center"
+        app:cardCornerRadius="3pt"
+        app:cardMaxElevation="1pt"
+        app:cardElevation="0.5pt"
+        android:background="#f2f2f2"
+        android:layout_centerInParent="true"
+        android:layout_centerHorizontal="true" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:background="#f2f2f2">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/car_m_m_v"
+                android:id="@+id/car_mmv"
+                android:textSize="9pt"
+                android:gravity="center_vertical"
+                android:textColor="@color/colorPrimary"
+                android:layout_marginTop="2pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/likes"
+                android:id="@+id/car_likes"
+                android:layout_below="@+id/car_mmv"
+                android:textSize="8pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/dislike"
+                android:id="@+id/car_dislikes"
+                android:layout_below="@+id/car_likes"
+                android:textSize="8pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/total_reviews"
+                android:id="@+id/car_total_reviews"
+                android:layout_below="@+id/car_dislikes"
+                android:textSize="8pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+<!--            <androidx.cardview.widget.CardView-->
+<!--                android:layout_width="match_parent"-->
+<!--                android:layout_height="wrap_content"-->
+<!--                android:layout_gravity="center"-->
+<!--                android:id="@+id/cardview_image"-->
+<!--                app:cardCornerRadius="2pt"-->
+<!--                app:cardMaxElevation="0.5pt"-->
+<!--                app:cardElevation="0.3pt"-->
+<!--                android:layout_centerHorizontal="true"-->
+<!--                android:background="#ffffff"-->
+<!--                android:layout_marginTop="4pt"-->
+<!--                android:layout_marginHorizontal="4pt">-->
+
+<!--                <androidx.appcompat.widget.AppCompatImageView-->
+<!--                    android:layout_width="match_parent"-->
+<!--                    android:layout_height="120pt"-->
+<!--                    android:scaleType="centerCrop"-->
+<!--                    android:id="@+id/car_image"-->
+<!--                    android:layout_centerHorizontal="true"-->
+<!--                    android:src="@drawable/ic_launcher_background"/>-->
+
+<!--            </androidx.cardview.widget.CardView>-->
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/ratings"
+                android:id="@+id/ratings_label"
+                android:layout_below="@+id/car_total_reviews"
+                android:gravity="center_vertical"
+                android:textSize="11pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="12pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/brand"
+                android:id="@+id/brand_label"
+                android:layout_below="@+id/ratings_label"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:paddingTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/brand_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:layout_below="@+id/ratings_label"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"
+                android:layout_marginTop="4pt" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price_value"
+                android:id="@+id/price_label"
+                android:layout_below="@+id/brand_rating"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:paddingTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/price_value_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:layout_below="@+id/brand_rating"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mileage2"
+                android:id="@+id/mileage_label"
+                android:layout_below="@+id/price_value_rating"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:paddingTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/mileage_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:layout_below="@+id/price_value_rating"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/model1"
+                android:id="@+id/Model_label"
+                android:layout_below="@+id/mileage_rating"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="4pt"
+                android:paddingTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/model_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.8"
+                android:scaleY="0.8"
+                android:layout_below="@+id/mileage_rating"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:stepSize="0.1"
+                android:isIndicator="true" />
+
+
+        </RelativeLayout>
+
+    </androidx.cardview.widget.CardView>
+
+</RelativeLayout>

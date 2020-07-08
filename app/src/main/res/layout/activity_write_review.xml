@@ -1,0 +1,262 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".writeReview">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RL_Main">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/car_info_Label"
+                android:text="@string/car_information"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_alignParentTop="true"
+                android:layout_marginTop="8pt"/>
+
+            <Spinner
+                android:id="@+id/makeSpinnerSelection"
+                android:layout_below="@+id/car_info_Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/SM" />
+
+            <Spinner
+                android:id="@+id/modelSpinnerSelection"
+                android:layout_below="@+id/makeSpinnerSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:background="@drawable/gradient_spinner"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/SelectModel"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/versionSpinnerSelection"
+                android:layout_below="@+id/modelSpinnerSelection"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/sv2"
+                android:drawSelectorOnTop="true"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_info_Label"
+                android:layout_below="@+id/versionSpinnerSelection"
+                android:text="@string/your_opinion"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginTop="8pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/brand"
+                android:id="@+id/brand_label"
+                android:layout_below="@+id/price_info_Label"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="8pt"
+                android:paddingTop="6pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/brand_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:layout_below="@+id/price_info_Label"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:rating="2.5"
+                android:stepSize="0.5"
+                android:isIndicator="false"
+                android:layout_marginTop="4pt" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/price_value"
+                android:id="@+id/price_label"
+                android:layout_below="@+id/brand_rating"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="8pt"
+                android:paddingTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/price_value_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:layout_below="@+id/brand_rating"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:rating="2.5"
+                android:stepSize="0.5"
+                android:isIndicator="false" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/mileage2"
+                android:id="@+id/mileage_label"
+                android:layout_below="@+id/price_value_rating"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="8pt"
+                android:paddingTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/mileage_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:layout_below="@+id/price_value_rating"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:rating="2.5"
+                android:stepSize="0.5"
+                android:isIndicator="false"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/model1"
+                android:id="@+id/Model_label"
+                android:layout_below="@+id/mileage_rating"
+                android:gravity="center_vertical"
+                android:textSize="10pt"
+                android:textColor="@color/colorBackgroundBottomNavigation"
+                android:layout_marginTop="4pt"
+                android:layout_marginHorizontal="8pt"
+                android:paddingTop="2pt"/>
+
+            <androidx.appcompat.widget.AppCompatRatingBar
+                android:id="@+id/model_rating"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                style="?android:attr/ratingBarStyle"
+                android:scaleX="0.9"
+                android:scaleY="0.9"
+                android:layout_below="@+id/mileage_rating"
+                android:layout_toEndOf="@+id/mileage_label"
+                android:numStars="5"
+                android:rating="2.5"
+                android:stepSize="0.5"
+                android:isIndicator="false" />
+
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/price_Layout"
+                android:layout_below="@+id/model_rating"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginTop="8pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/review_title_field"
+                    android:hint="@string/review_title"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <com.google.android.material.textfield.TextInputLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/description_Layout"
+                android:layout_below="@+id/price_Layout"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginTop="4pt"
+                android:layout_marginBottom="4pt"
+                style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox">
+
+                <androidx.appcompat.widget.AppCompatEditText
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/description_field"
+                    android:hint="@string/descp112"
+                    android:inputType="text"/>
+
+            </com.google.android.material.textfield.TextInputLayout>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/familiaritySpinnerSelection"
+                android:layout_below="@+id/description_Layout"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/f23"
+                android:drawSelectorOnTop="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_btn"
+                android:text="@string/submit_review2"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:background="@color/colorPrimaryDark"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/familiaritySpinnerSelection"
+                android:layout_marginHorizontal="40pt"
+                android:layout_marginTop="8pt"
+                android:layout_marginBottom="4pt"
+                android:paddingHorizontal="5pt"
+                android:paddingVertical="8pt" />
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

@@ -1,0 +1,155 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".searchCarReviews">
+
+    <androidx.appcompat.widget.Toolbar
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:id="@+id/toolbar"
+        android:background="@color/colorPrimaryDark"
+        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar"/>
+
+    <ScrollView
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:layout_below="@id/toolbar" >
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:id="@+id/RL_Main">
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/write_a_review"
+                android:id="@+id/RAR_label"
+                android:gravity="center_vertical"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="8pt"
+                android:layout_marginHorizontal="8pt"/>
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/ask_review_str"
+                android:id="@+id/RAR_guide"
+                android:layout_below="@+id/RAR_label"
+                android:textSize="7pt"
+                android:gravity="center_vertical"
+                android:layout_marginTop="2pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="8pt"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/write_review_btn"
+                android:text="@string/write_review"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:inputType="text"
+                android:background="@color/colorPrimaryDark"
+                android:layout_below="@+id/RAR_guide"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginTop="2pt"
+                android:layout_marginBottom="4pt"
+                android:paddingHorizontal="4pt"
+                android:paddingVertical="4pt" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/car_info_Label"
+                android:text="@string/car_information"
+                android:layout_below="@+id/write_review_btn"
+                android:textColor="@color/colorPrimary"
+                android:textSize="12pt"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginTop="8pt"/>
+
+            <Spinner
+                android:id="@+id/makeSpinnerSelection"
+                android:layout_below="@+id/car_info_Label"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/SM" />
+
+            <Spinner
+                android:id="@+id/modelSpinnerSelection"
+                android:layout_below="@+id/makeSpinnerSelection"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:background="@drawable/gradient_spinner"
+                android:drawSelectorOnTop="true"
+                android:tooltipText="@string/SelectModel"/>
+
+            <Spinner
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/versionSpinnerSelection"
+                android:layout_below="@+id/modelSpinnerSelection"
+                android:background="@drawable/gradient_spinner"
+                android:layout_marginHorizontal="8pt"
+                android:layout_marginVertical="8pt"
+                android:tooltipText="@string/sv2"
+                android:drawSelectorOnTop="true"/>
+
+            <androidx.appcompat.widget.AppCompatButton
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/post_btn"
+                android:text="@string/search"
+                android:textColor="#ffffff"
+                android:gravity="center"
+                android:background="@color/colorPrimaryDark"
+                android:layout_centerHorizontal="true"
+                android:layout_below="@+id/versionSpinnerSelection"
+                android:layout_marginHorizontal="40pt"
+                android:layout_marginTop="8pt"
+                android:layout_marginBottom="4pt"
+                android:paddingHorizontal="5pt"
+                android:inputType="text"
+                android:paddingVertical="8pt" />
+
+            <androidx.appcompat.widget.AppCompatTextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/rcar"
+                android:id="@+id/R_label"
+                android:layout_below="@id/post_btn"
+                android:gravity="center_vertical"
+                android:textSize="8pt"
+                android:textStyle="bold"
+                android:textColor="#000"
+                android:layout_marginTop="8pt"
+                android:layout_marginBottom="4pt"
+                android:layout_marginHorizontal="4pt"/>
+
+            <androidx.recyclerview.widget.RecyclerView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/recyclerViewReviews"
+                android:layout_below="@id/R_label"
+                android:paddingHorizontal="4pt"
+                android:clipToPadding="false"
+                android:orientation="vertical"/>
+
+        </RelativeLayout>
+
+    </ScrollView>
+
+</RelativeLayout>

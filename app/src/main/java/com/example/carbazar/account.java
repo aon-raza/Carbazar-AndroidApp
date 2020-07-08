@@ -57,6 +57,8 @@ public class account extends AppCompatActivity implements BottomNavigationView.O
     IMyService iMyService;
 
     private AppCompatTextView savedAdsBtn;
+    private AppCompatTextView reviewsBtn;
+    private AppCompatTextView recommendationBtn;
     private AppCompatTextView privacyBtn;
     private AppCompatTextView notificationsBtn;
     private AppCompatTextView contactBtn;
@@ -84,6 +86,8 @@ public class account extends AppCompatActivity implements BottomNavigationView.O
         user_image = findViewById(R.id.user_image);
 
         savedAdsBtn = findViewById(R.id.savedAdsBtn);
+        reviewsBtn = findViewById(R.id.reviewsBtn);
+        recommendationBtn = findViewById(R.id.recommendationBtn);
         privacyBtn = findViewById(R.id.privacyBtn);
         notificationsBtn = findViewById(R.id.notificationsBtn);
         contactBtn = findViewById(R.id.contactBtn);
@@ -95,6 +99,24 @@ public class account extends AppCompatActivity implements BottomNavigationView.O
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(account.this, savedAds.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        recommendationBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(account.this, recommender.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        reviewsBtn.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(account.this, searchCarReviews.class);
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }
