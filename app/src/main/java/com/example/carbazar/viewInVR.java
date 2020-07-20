@@ -3,10 +3,15 @@ package com.example.carbazar;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.appcompat.widget.AppCompatButton;
 import androidx.appcompat.widget.Toolbar;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.MenuItem;
 import android.view.View;
+
+import com.carBazarProject.CarBazarVR.UnityPlayerActivity;
 
 public class viewInVR extends AppCompatActivity {
 
@@ -29,7 +34,17 @@ public class viewInVR extends AppCompatActivity {
             @Override
             public void onClick(View view) {
                 /////////
-
+                Intent intent = new Intent(viewInVR.this, unityApp.class);
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                Intent intent = new Intent(viewInVR.this, UnityPlayerActivity.class);
+//                startActivity(intent);
+//                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+//                FragmentManager fragmentManager = getSupportFragmentManager();
+//                FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+//                UnityFragment fragment = new UnityFragment();
+//                fragmentTransaction.add(R.id.fragmentContainer, fragment);
+//                fragmentTransaction.commit();
             }
         });
     }

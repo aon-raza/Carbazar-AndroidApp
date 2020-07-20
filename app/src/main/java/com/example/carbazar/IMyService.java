@@ -1,5 +1,6 @@
 package com.example.carbazar;
 
+import com.example.carbazar.Models.ARModel;
 import com.example.carbazar.Models.common;
 import com.example.carbazar.Models.contactModel;
 import com.example.carbazar.Models.contactSellerModel;
@@ -290,6 +291,31 @@ public interface IMyService {
 
     @POST("visit")
     Observable<Object> visit(@Body siteVisitModel body);
+
+    //AR Models
+
+    @GET("ArModels")
+    Observable<Object> getAllArModels();
+
+    @POST("singleArModel")
+    Observable<Object> singleArModel(@Body ARModel body);
+
+
+    @POST("ArModels/comment")
+    Observable<Object> postARmodelComment(@Body ARModel body);
+
+    @PUT("ArModel/like")
+    Observable<Object> likeARModel (@Body ARModel body);
+
+    @PUT("ArModel/unlike")
+    Observable<Object> unlikeARModel (@Body ARModel body);
+
+    @PUT("ArModel/dislike")
+    Observable<Object> dislikeARModel (@Body ARModel body);
+
+    @PUT("ArModel/undislike")
+    Observable<Object> undislikeARModel (@Body ARModel body);
+
 
     //to Flask API
 

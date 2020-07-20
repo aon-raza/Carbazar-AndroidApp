@@ -1,2 +1,2 @@
-include ':app'
+include ':app', ':CarBazar-VR-debug'
 rootProject.name='Car Bazar'

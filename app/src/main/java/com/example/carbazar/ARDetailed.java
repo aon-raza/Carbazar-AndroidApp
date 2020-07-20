@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager;
 import androidx.recyclerview.widget.RecyclerView;
 
 import android.app.Activity;
+import android.app.ProgressDialog;
 import android.content.Context;
 import android.content.Intent;
 import android.net.ConnectivityManager;
@@ -24,20 +25,31 @@ import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.carbazar.Models.ARComments;
+import com.example.carbazar.Models.ARModel;
 import com.example.carbazar.Models.common;
 import com.example.carbazar.recyclerViewAdapters.recyclerViewAdapterARComments;
 import com.google.android.material.bottomnavigation.BottomNavigationView;
+import com.mongodb.util.JSON;
+
+import org.json.JSONArray;
+import org.json.JSONObject;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import de.hdodenhof.circleimageview.CircleImageView;
+import io.reactivex.android.schedulers.AndroidSchedulers;
+import io.reactivex.disposables.CompositeDisposable;
+import io.reactivex.functions.Consumer;
+import io.reactivex.schedulers.Schedulers;
+import retrofit2.Retrofit;
 
 public class ARDetailed extends AppCompatActivity  implements BottomNavigationView.OnNavigationItemSelectedListener{
 
     private Toolbar toolbar;
     private BottomNavigationView bottomNavigationView;
     String selectedModel = "BMW";
+    String selectedModelID = "";
     private AppCompatButton viewInARBTN;
     private AppCompatButton view_in_vr;
 
@@ -58,6 +70,11 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
     boolean disliked = false;
 
     List<ARComments> commentsList;
+
+    CompositeDisposable compositeDisposable = new CompositeDisposable();
+    IMyService iMyService;
+
+    ProgressDialog mDialog;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,9 +107,106 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
 
         commentsList = new ArrayList<ARComments>();
 
+        Retrofit retrofit = RetrofitClient.getInstance();
+        iMyService = retrofit.create(IMyService.class);
+
+        mDialog = new ProgressDialog(ARDetailed.this);
+
+        mDialog.setMessage("Please wait...");
+        mDialog.show();
         Bundle extras = getIntent().getExtras();
         if(extras!= null){
             selectedModel = extras.getString("key");
+
+            compositeDisposable.add(iMyService.getAllArModels()
+                    .subscribeOn(Schedulers.io())
+                    .observeOn(AndroidSchedulers.mainThread())
+                    .subscribe(new Consumer<Object>() {
+                        @Override
+                        public void accept(Object s) throws Exception {
+                            //my own
+                            JSONArray jsonArray = new JSONArray(JSON.serialize(s));
+
+                            int i = 0;
+                            while(i < jsonArray.length()){
+                                String modelName = jsonArray.getJSONObject(i).getString("name");
+                                if (selectedModel.contentEquals(modelName)){
+                                    selectedModelID = jsonArray.getJSONObject(i).getString("_id");
+                                    break;
+                                }
+                                i++;
+                            }
+
+                            ARModel arModel = new ARModel();
+                            arModel.setModelId(selectedModelID);
+                            compositeDisposable.add(iMyService.singleArModel(arModel)
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Consumer<Object>() {
+                                        @Override
+                                        public void accept(Object s) throws Exception {
+                                            JSONObject jsonObject = new JSONObject(JSON.serialize(s));
+                                            JSONArray commentUsers = jsonObject.getJSONArray("likes");
+                                            int i = 0;
+                                            while(i < commentUsers.length()) {
+                                                String commentId = commentUsers.getString(i);
+                                                if (commentId.contentEquals(common.currentUser.getId().replaceAll(" ", ""))) {
+                                                    likeBtn.setImageResource(R.drawable.liked);
+                                                    dislikeBtn.setImageResource(R.drawable.dislike);
+                                                    likeTV.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                                    dislikeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
+                                                    liked = true;
+                                                    disliked = false;
+                                                    break;
+                                                }
+                                                i++;
+                                            }
+
+                                            commentUsers = jsonObject.getJSONArray("dislikes");
+                                            i = 0;
+                                            while(i < commentUsers.length()) {
+                                                String commentId = commentUsers.getString(i);
+                                                if (commentId.contentEquals(common.currentUser.getId().replaceAll(" ", ""))) {
+                                                    dislikeBtn.setImageResource(R.drawable.disliked);
+                                                    likeBtn.setImageResource(R.drawable.like);
+                                                    dislikeTV.setTextColor(getResources().getColor(R.color.colorPrimary));
+                                                    likeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
+                                                    disliked = true;
+                                                    liked = false;
+                                                    break;
+                                                }
+                                                i++;
+                                            }
+
+                                            JSONArray allComments = jsonObject.getJSONArray("comments");
+                                            i = 0;
+                                            while(i < allComments.length()) {
+                                                JSONObject aComment = allComments.getJSONObject(i);
+
+                                                ARComments arComments = new ARComments();
+                                                arComments.setComment(aComment.getString("text"));
+                                                arComments.setCommenterName(aComment.getJSONObject("author").getString("username"));
+                                                commentsList.add(arComments);
+
+                                                i++;
+                                            }
+                                            initRecyclerView();
+                                            mDialog.dismiss();
+                                        }
+                                    }, new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception {
+                                            Toast.makeText(ARDetailed.this, "Server Error! "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                                        }
+                                    }));
+                        }
+                    }, new Consumer<Throwable>() {
+                        @Override
+                        public void accept(Throwable throwable) throws Exception {
+                            Toast.makeText(ARDetailed.this, "Server Error! "+throwable.getMessage(), Toast.LENGTH_SHORT).show();
+                        }
+                    }));
+
         }
 
         if(selectedModel.contentEquals("BMW")){
@@ -181,11 +295,58 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
                     dislikeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
                     liked = true;
                     disliked = false;
+
+                    ARModel arModel = new ARModel();
+                    arModel.setModelId(selectedModelID);
+                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                    compositeDisposable.add(iMyService.likeARModel(arModel)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Object>() {
+                                @Override
+                                public void accept(Object s) throws Exception {
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }));
+
+                    compositeDisposable.add(iMyService.undislikeARModel(arModel)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Object>() {
+                                @Override
+                                public void accept(Object s) throws Exception {
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }));
                 }
                 else {
                     likeBtn.setImageResource(R.drawable.like);
                     likeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
                     liked = false;
+                    ARModel arModel = new ARModel();
+                    arModel.setModelId(selectedModelID);
+                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                    compositeDisposable.add(iMyService.unlikeARModel(arModel)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Object>() {
+                                @Override
+                                public void accept(Object s) throws Exception {
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }));
                 }
             }
         });
@@ -200,11 +361,59 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
                     likeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
                     disliked = true;
                     liked = false;
+
+                    ARModel arModel = new ARModel();
+                    arModel.setModelId(selectedModelID);
+                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                    compositeDisposable.add(iMyService.dislikeARModel(arModel)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Object>() {
+                                @Override
+                                public void accept(Object s) throws Exception {
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }));
+
+                    compositeDisposable.add(iMyService.unlikeARModel(arModel)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Object>() {
+                                @Override
+                                public void accept(Object s) throws Exception {
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }));
                 }
                 else {
                     dislikeBtn.setImageResource(R.drawable.dislike);
                     dislikeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
                     disliked = false;
+
+                    ARModel arModel = new ARModel();
+                    arModel.setModelId(selectedModelID);
+                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                    compositeDisposable.add(iMyService.undislikeARModel(arModel)
+                            .subscribeOn(Schedulers.io())
+                            .observeOn(AndroidSchedulers.mainThread())
+                            .subscribe(new Consumer<Object>() {
+                                @Override
+                                public void accept(Object s) throws Exception {
+                                }
+                            }, new Consumer<Throwable>() {
+                                @Override
+                                public void accept(Throwable throwable) throws Exception {
+                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                }
+                            }));
                 }
             }
         });
@@ -237,9 +446,31 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
                             arComments.setComment(commentET.getText().toString());
                             arComments.setCommenterName(common.currentUser.getName());
                             commentsList.add(arComments);
-                            commentET.setText("");
+
                             hideKeyboard(v);
                             initRecyclerView();
+
+                            ARModel arModel = new ARModel();
+                            arModel.setModelId(selectedModelID);
+                            arModel.setUser_id(common.currentUser.getId().replaceAll(" ",""));
+                            arModel.setUsername(common.currentUser.getName());
+                            arModel.setText(commentET.getText().toString());
+
+                            commentET.setText("");
+
+                            compositeDisposable.add(iMyService.postARmodelComment(arModel)
+                                    .subscribeOn(Schedulers.io())
+                                    .observeOn(AndroidSchedulers.mainThread())
+                                    .subscribe(new Consumer<Object>() {
+                                        @Override
+                                        public void accept(Object s) throws Exception {
+                                        }
+                                    }, new Consumer<Throwable>() {
+                                        @Override
+                                        public void accept(Throwable throwable) throws Exception {
+                                            Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                        }
+                                    }));
                         }
                     }
                 }else{
