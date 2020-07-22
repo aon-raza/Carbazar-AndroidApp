@@ -26,7 +26,139 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/bmw_RL">
+                android:id="@+id/benz_RL">
+
+                <ImageView
+                    android:id="@+id/benz"
+                    android:layout_width="60pt"
+                    android:layout_height="40pt"
+                    android:src="@drawable/audi"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/benz_txtv"
+                    android:text="@string/mercedes_benz"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/benz"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5pt"
+                    android:background="#f2f2f2"
+                    android:layout_below="@+id/benz"
+                    android:layout_marginVertical="2pt"
+                    android:layout_marginHorizontal="2pt"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acura_RL"
+                android:layout_below="@id/benz_RL">
+
+                <ImageView
+                    android:id="@+id/acura"
+                    android:layout_width="60pt"
+                    android:layout_height="40pt"
+                    android:src="@drawable/acura"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/acura_txtv"
+                    android:text="@string/acura_black"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/acura"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5pt"
+                    android:background="#f2f2f2"
+                    android:layout_below="@+id/acura"
+                    android:layout_marginVertical="2pt"
+                    android:layout_marginHorizontal="2pt"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/acurablue_RL"
+                android:layout_below="@+id/acura_RL">
+
+                <ImageView
+                    android:id="@+id/acurablue"
+                    android:layout_width="60pt"
+                    android:layout_height="40pt"
+                    android:src="@drawable/blue_acura"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/acurablue_txtv"
+                    android:text="@string/ablue"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/acurablue"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5pt"
+                    android:background="#f2f2f2"
+                    android:layout_below="@+id/acurablue"
+                    android:layout_marginVertical="2pt"
+                    android:layout_marginHorizontal="2pt"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/porsche_red_RL"
+                android:layout_below="@+id/acurablue_RL">
+
+                <ImageView
+                    android:id="@+id/porsche_red"
+                    android:layout_width="60pt"
+                    android:layout_height="40pt"
+                    android:src="@drawable/red_porsche"/>
+
+                <androidx.appcompat.widget.AppCompatTextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/porsche_red_txtv"
+                    android:text="@string/porsche_red"
+                    android:gravity="center_vertical"
+                    android:layout_centerVertical="true"
+                    android:textSize="8pt"
+                    android:layout_marginLeft="6pt"
+                    android:layout_toRightOf="@+id/porsche_red"/>
+
+                <RelativeLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="0.5pt"
+                    android:background="#f2f2f2"
+                    android:layout_below="@+id/porsche_red"
+                    android:layout_marginVertical="2pt"
+                    android:layout_marginHorizontal="2pt"/>
+
+            </RelativeLayout>
+
+            <RelativeLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:id="@+id/bmw_RL"
+                android:layout_below="@+id/porsche_red_RL">
 
                 <ImageView
                     android:src="@drawable/black"
@@ -91,41 +223,8 @@
             <RelativeLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:id="@+id/benz_RL"
-                android:layout_below="@+id/porsch_RL">
-
-            <ImageView
-                android:id="@+id/benz"
-                android:layout_width="60pt"
-                android:layout_height="40pt"
-                android:src="@drawable/audi"/>
-
-                <androidx.appcompat.widget.AppCompatTextView
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:id="@+id/benz_txtv"
-                    android:text="@string/mercedes_benz"
-                    android:gravity="center_vertical"
-                    android:layout_centerVertical="true"
-                    android:textSize="8pt"
-                    android:layout_marginLeft="6pt"
-                    android:layout_toRightOf="@+id/benz"/>
-
-                <RelativeLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="0.5pt"
-                    android:background="#f2f2f2"
-                    android:layout_below="@+id/benz"
-                    android:layout_marginVertical="2pt"
-                    android:layout_marginHorizontal="2pt"/>
-
-            </RelativeLayout>
-
-            <RelativeLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
                 android:id="@+id/elantra_RL"
-                android:layout_below="@+id/benz_RL">
+                android:layout_below="@+id/porsch_RL">
 
                 <ImageView
                     android:id="@+id/elantra"

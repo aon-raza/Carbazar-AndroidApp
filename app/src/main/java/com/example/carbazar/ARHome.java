@@ -21,6 +21,10 @@ public class ARHome extends AppCompatActivity  implements BottomNavigationView.O
     private RelativeLayout relativeLayoutBenz;
     private RelativeLayout relativeLayoutElentra;
 
+    private RelativeLayout relativeLayoutAcura;
+    private RelativeLayout relativeLayoutAcuraBlue;
+    private RelativeLayout relativeLayoutPorscheRed;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -42,6 +46,10 @@ public class ARHome extends AppCompatActivity  implements BottomNavigationView.O
         relativeLayoutPorsch = findViewById(R.id.porsch_RL);
         relativeLayoutBenz = findViewById(R.id.benz_RL);
         relativeLayoutElentra = findViewById(R.id.elantra_RL);
+
+        relativeLayoutAcura = findViewById(R.id.acura_RL);
+        relativeLayoutAcuraBlue = findViewById(R.id.acurablue_RL);
+        relativeLayoutPorscheRed = findViewById(R.id.porsche_red_RL);
 
         relativeLayoutBMW.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -78,6 +86,36 @@ public class ARHome extends AppCompatActivity  implements BottomNavigationView.O
             public void onClick(View v) {
                 Intent intent = new Intent(ARHome.this, ARDetailed.class);
                 intent.putExtra("key", "Elentra");
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        relativeLayoutAcura.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ARHome.this, ARDetailed.class);
+                intent.putExtra("key", "acura");
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        relativeLayoutAcuraBlue.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ARHome.this, ARDetailed.class);
+                intent.putExtra("key", "acurablue");
+                startActivity(intent);
+                overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+            }
+        });
+
+        relativeLayoutPorscheRed.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(ARHome.this, ARDetailed.class);
+                intent.putExtra("key", "porsche_red");
                 startActivity(intent);
                 overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
             }

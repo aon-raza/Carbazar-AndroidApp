@@ -42,7 +42,10 @@ public class ARTour extends AppCompatActivity /*implements View.OnClickListener 
             bmwRenderable,
             porschRenderable,
             benzRenderable,
-            elantraRenderable;
+            elantraRenderable,
+            acuraRenderable,
+            acurablueRenderable,
+            porsche_redRenderable;
     //ImageView bmw, porsch, elantra, benz;
     //View arrayView[];
     String selectedModel = "BMW";    //Default bmw is selected
@@ -256,6 +259,45 @@ public class ARTour extends AppCompatActivity /*implements View.OnClickListener 
                     );
         }
 
+        else if(selectedModel.contentEquals("acura")){
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.acura)
+                    .build().thenAccept(renderable -> acuraRenderable = renderable)
+                    .exceptionally(
+                            throwable ->
+                            {
+                                Toast.makeText(this,"Unable to load acura model", Toast.LENGTH_SHORT).show();
+                                return null;
+                            }
+                    );
+        }
+
+        else if(selectedModel.contentEquals("acurablue")){
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.acurablue)
+                    .build().thenAccept(renderable -> acurablueRenderable = renderable)
+                    .exceptionally(
+                            throwable ->
+                            {
+                                Toast.makeText(this,"Unable to load acurablue model", Toast.LENGTH_SHORT).show();
+                                return null;
+                            }
+                    );
+        }
+
+        else if(selectedModel.contentEquals("porsche_red")){
+            ModelRenderable.builder()
+                    .setSource(this, R.raw.porsche_red)
+                    .build().thenAccept(renderable -> porsche_redRenderable = renderable)
+                    .exceptionally(
+                            throwable ->
+                            {
+                                Toast.makeText(this,"Unable to load elantra model", Toast.LENGTH_SHORT).show();
+                                return null;
+                            }
+                    );
+        }
+
     }
 
 
@@ -295,6 +337,36 @@ public class ARTour extends AppCompatActivity /*implements View.OnClickListener 
             elantra.select();
 
             generalTransformableNode = elantra;
+        }
+
+        else if(selectedModel.contentEquals("acura"))
+        {
+            TransformableNode acura= new TransformableNode(arFragment.getTransformationSystem());
+            acura.setParent(anchorNode);
+            acura.setRenderable(acuraRenderable);
+            acura.select();
+
+            generalTransformableNode = acura;
+        }
+
+        else if(selectedModel.contentEquals("acurablue"))
+        {
+            TransformableNode acurablue= new TransformableNode(arFragment.getTransformationSystem());
+            acurablue.setParent(anchorNode);
+            acurablue.setRenderable(acurablueRenderable);
+            acurablue.select();
+
+            generalTransformableNode = acurablue;
+        }
+
+        else if(selectedModel.contentEquals("porsche_red"))
+        {
+            TransformableNode porsche_red= new TransformableNode(arFragment.getTransformationSystem());
+            porsche_red.setParent(anchorNode);
+            porsche_red.setRenderable(porsche_redRenderable);
+            porsche_red.select();
+
+            generalTransformableNode = porsche_red;
         }
     }
 }

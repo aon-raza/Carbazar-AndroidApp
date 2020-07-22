@@ -341,7 +341,7 @@ public interface IMyService {
                                   @Query("query") String query);
 
 
-    @GET("/pakWheelsHome")
+    @GET("pakWheelsHome")
     Observable<Object> PakWheelsHome();
 
     @GET("pakWheelsSearch")
@@ -363,7 +363,7 @@ public interface IMyService {
                                   @Query("query") String query);
 
 
-    @GET("/pkMotorsHome")
+    @GET("pkMotorsHome")
     Observable<Object> PKMotorsHome();
 
     @GET("pkMotorsSearch")

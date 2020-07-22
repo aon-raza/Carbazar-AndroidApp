@@ -106,3 +106,29 @@ sceneform.asset('SampleData/benz/Mercedes-Benz CL600 2007 OBJ.obj',
         'default',
         'SampleData/benz/Mercedes-Benz CL600 2007 OBJ.sfa',
         'src/main/res/raw/benz')
+
+apply plugin: 'com.google.ar.sceneform.plugin'
+sceneform.asset('SampleData/acura.fbx',
+        'default',
+        'SampleData/acura.sfa',
+        'src/main/res/raw/acura')
+
+sceneform.asset('SampleData/acurablue.fbx',
+        'default',
+        'SampleData/acurablue.sfa',
+        'src/main/res/raw/acurablue')
+
+//sceneform.asset('SampleData/benzz_new_shape.fbx',
+//        'default',
+//        'SampleData/benzz_new_shape.sfa',
+//        'src/main/res/raw/benzz_new_shape')
+
+//sceneform.asset('SampleData/benzzblack.fbx',
+//        'default',
+//        'SampleData/benzzblack.sfa',
+//        'src/main/res/raw/benzzblack')
+
+sceneform.asset('SampleData/porsche_red.fbx',
+        'default',
+        'SampleData/porsche_red.sfa',
+        'src/main/res/raw/porsche_red')

@@ -239,6 +239,27 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
             car_image.setImageResource(R.drawable.corolla);
         }
 
+        else if(selectedModel.contentEquals("acura")){
+            getSupportActionBar().setTitle("Acura Black");
+            car_image_ARDetail.setImageResource(R.drawable.acura);
+            arModelName.setText("Acura Black");
+            car_image.setImageResource(R.drawable.acura);
+        }
+
+        else if(selectedModel.contentEquals("acurablue")){
+            getSupportActionBar().setTitle("Acura Blue");
+            car_image_ARDetail.setImageResource(R.drawable.blue_acura);
+            arModelName.setText("Acura Blue");
+            car_image.setImageResource(R.drawable.blue_acura);
+        }
+
+        else if(selectedModel.contentEquals("porsche_red")){
+            getSupportActionBar().setTitle("Porsche Red");
+            car_image_ARDetail.setImageResource(R.drawable.red_porsche);
+            arModelName.setText("Porsche Red");
+            car_image.setImageResource(R.drawable.red_porsche);
+        }
+
 //        view_in_vr = findViewById(R.id.view_in_vr);
 //        view_in_vr.setOnClickListener(new View.OnClickListener() {
 //            @Override
@@ -282,71 +303,100 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
                     overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
 
+                else if(selectedModel.contentEquals("acura")){
+                    Intent intent = new Intent(ARDetailed.this, ARTour.class);
+                    intent.putExtra("key", "acura");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
+
+                else if(selectedModel.contentEquals("acurablue")){
+                    Intent intent = new Intent(ARDetailed.this, ARTour.class);
+                    intent.putExtra("key", "acurablue");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
+
+                else if(selectedModel.contentEquals("porsche_red")){
+                    Intent intent = new Intent(ARDetailed.this, ARTour.class);
+                    intent.putExtra("key", "porsche_red");
+                    startActivity(intent);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
+                }
+
             }
         });
 
         likeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!liked){
-                    likeBtn.setImageResource(R.drawable.liked);
-                    dislikeBtn.setImageResource(R.drawable.dislike);
-                    likeTV.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    dislikeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
-                    liked = true;
-                    disliked = false;
-
-                    ARModel arModel = new ARModel();
-                    arModel.setModelId(selectedModelID);
-                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
-                    compositeDisposable.add(iMyService.likeARModel(arModel)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(Object s) throws Exception {
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
-                                }
-                            }));
-
-                    compositeDisposable.add(iMyService.undislikeARModel(arModel)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(Object s) throws Exception {
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
-                                }
-                            }));
+                if(common.currentUser == null){
+                    Toast.makeText(ARDetailed.this, "Sign in first", Toast.LENGTH_SHORT).show();
+                    Intent intent3 = new Intent(ARDetailed.this, signin.class);
+                    startActivity(intent3);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
-                else {
-                    likeBtn.setImageResource(R.drawable.like);
-                    likeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
-                    liked = false;
-                    ARModel arModel = new ARModel();
-                    arModel.setModelId(selectedModelID);
-                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
-                    compositeDisposable.add(iMyService.unlikeARModel(arModel)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(Object s) throws Exception {
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
-                                }
-                            }));
+                else{
+                    if (!liked){
+                        likeBtn.setImageResource(R.drawable.liked);
+                        dislikeBtn.setImageResource(R.drawable.dislike);
+                        likeTV.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        dislikeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
+                        liked = true;
+                        disliked = false;
+
+                        ARModel arModel = new ARModel();
+                        arModel.setModelId(selectedModelID);
+                        arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                        compositeDisposable.add(iMyService.likeARModel(arModel)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+
+                        compositeDisposable.add(iMyService.undislikeARModel(arModel)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+                    }
+                    else {
+                        likeBtn.setImageResource(R.drawable.like);
+                        likeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
+                        liked = false;
+                        ARModel arModel = new ARModel();
+                        arModel.setModelId(selectedModelID);
+                        arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                        compositeDisposable.add(iMyService.unlikeARModel(arModel)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+                    }
                 }
             }
         });
@@ -354,66 +404,74 @@ public class ARDetailed extends AppCompatActivity  implements BottomNavigationVi
         dislikeBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                if (!disliked){
-                    dislikeBtn.setImageResource(R.drawable.disliked);
-                    likeBtn.setImageResource(R.drawable.like);
-                    dislikeTV.setTextColor(getResources().getColor(R.color.colorPrimary));
-                    likeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
-                    disliked = true;
-                    liked = false;
-
-                    ARModel arModel = new ARModel();
-                    arModel.setModelId(selectedModelID);
-                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
-                    compositeDisposable.add(iMyService.dislikeARModel(arModel)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(Object s) throws Exception {
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
-                                }
-                            }));
-
-                    compositeDisposable.add(iMyService.unlikeARModel(arModel)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(Object s) throws Exception {
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
-                                }
-                            }));
+                if(common.currentUser == null){
+                    Toast.makeText(ARDetailed.this, "Sign in first", Toast.LENGTH_SHORT).show();
+                    Intent intent3 = new Intent(ARDetailed.this, signin.class);
+                    startActivity(intent3);
+                    overridePendingTransition(android.R.anim.fade_in, android.R.anim.fade_out);
                 }
-                else {
-                    dislikeBtn.setImageResource(R.drawable.dislike);
-                    dislikeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
-                    disliked = false;
+                else{
+                    if (!disliked){
+                        dislikeBtn.setImageResource(R.drawable.disliked);
+                        likeBtn.setImageResource(R.drawable.like);
+                        dislikeTV.setTextColor(getResources().getColor(R.color.colorPrimary));
+                        likeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
+                        disliked = true;
+                        liked = false;
 
-                    ARModel arModel = new ARModel();
-                    arModel.setModelId(selectedModelID);
-                    arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
-                    compositeDisposable.add(iMyService.undislikeARModel(arModel)
-                            .subscribeOn(Schedulers.io())
-                            .observeOn(AndroidSchedulers.mainThread())
-                            .subscribe(new Consumer<Object>() {
-                                @Override
-                                public void accept(Object s) throws Exception {
-                                }
-                            }, new Consumer<Throwable>() {
-                                @Override
-                                public void accept(Throwable throwable) throws Exception {
-                                    Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
-                                }
-                            }));
+                        ARModel arModel = new ARModel();
+                        arModel.setModelId(selectedModelID);
+                        arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                        compositeDisposable.add(iMyService.dislikeARModel(arModel)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+
+                        compositeDisposable.add(iMyService.unlikeARModel(arModel)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+                    }
+                    else {
+                        dislikeBtn.setImageResource(R.drawable.dislike);
+                        dislikeTV.setTextColor(getResources().getColor(R.color.colorIconsAR));
+                        disliked = false;
+
+                        ARModel arModel = new ARModel();
+                        arModel.setModelId(selectedModelID);
+                        arModel.setUserId(common.currentUser.getId().replaceAll(" ",""));
+                        compositeDisposable.add(iMyService.undislikeARModel(arModel)
+                                .subscribeOn(Schedulers.io())
+                                .observeOn(AndroidSchedulers.mainThread())
+                                .subscribe(new Consumer<Object>() {
+                                    @Override
+                                    public void accept(Object s) throws Exception {
+                                    }
+                                }, new Consumer<Throwable>() {
+                                    @Override
+                                    public void accept(Throwable throwable) throws Exception {
+                                        Toast.makeText(ARDetailed.this, "Server Error!", Toast.LENGTH_SHORT).show();
+                                    }
+                                }));
+                    }
                 }
             }
         });
